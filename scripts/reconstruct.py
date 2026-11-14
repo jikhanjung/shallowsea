@@ -80,6 +80,6 @@ with zipfile.ZipFile(INPUTS / 'dem.zip') as archive,tempfile.TemporaryDirectory(
             print(age,np.round(stats,3),flush=True)
 assert len({x[0] for x in rows}) == len(rows) == 109
 with open(ROOT / 'results/PALEOMAP_CRUST1_0-540Ma.csv','w',newline='') as f:
-    writer=csv.writer(f)
+    writer=csv.writer(f,lineterminator='\n')
     writer.writerow(['age_ma']+[f'{name}_{units}' for name in categories for units in ('million_km2','billion_km3')]+['shallow_0_to_200m_million_km2','shallow_0_to_200m_billion_km3'])
     writer.writerows([f"{row[0]:g}", *(f"{value:.5f}" for value in row[1:])] for row in sorted(rows,reverse=True))

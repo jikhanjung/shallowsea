@@ -26,7 +26,7 @@
 
 PaleoCoastlines `areas.csv`로 한 면적·부피 수지와 원본 PaleoDEM 전 지구 수심 면적은 스크립트 없이 devlog 001에 수치만 남아 있다.
 
-**재현 환경이 이 기계(m710q)에는 아직 없다.** `inputs/`가 비어 있고 pygplates가 설치되어 있지 않다. 절차는 [README.md](README.md)에 있다.
+**m710q에서 재현된다**(2026-11-14, [devlog 002](devlog/20261114_002_reproduce_on_m710q.md)). Python 3.13.17, NumPy 2.5.4, pyGPlates 1.0.0, GDAL 3.12.2로 세 스크립트를 다시 돌렸다. CSV와 `depth_audit.txt`는 바이트 단위로 같고, `airy_sensitivity.txt`는 첫 줄의 두 합계만 마지막 자리(약 1e-16)가 다르다. 절차는 [README.md](README.md)에 있다.
 
 ## 함정
 
@@ -39,4 +39,4 @@ PaleoCoastlines `areas.csv`로 한 면적·부피 수지와 원본 PaleoDEM 전 
 
 ## 다음
 
-[TODOs.md](TODOs.md)의 "검증" 네 항목이다. 판별·지역별 분포, 면적·부피와 변형, 독립 고수심 검증, 지역 침강과 물리적 일관성 순서로 적혀 있다.
+순서는 [devlog P01](devlog/20261114_P01_validation_plan.md)의 계획을 따른다: 재현 환경 → PaleoDEM 수심 등급표 → 회전 모델과 DEM의 정렬 검사 → 독립 침수·수심 자료 → 독립 해수면과 지역 침강 → 면적·부피와 변형. 항목별 할 일은 [TODOs.md](TODOs.md)에 있다.

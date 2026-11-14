@@ -264,6 +264,7 @@ function makeCharts() {
   }));
   independentCharts();
   marginChart();
+  volumeCharts();
   charts.push(timeChart($('chart-macro'), {
     unit: '백만 km²', onPick: pick,
     series: [
@@ -307,6 +308,25 @@ function marginChart() {
       { label: '현대 대륙 모양의 0–200 m 띠(009, 판구조 해수면)', short: '0–200 m 띠', color: 'var(--series-3)', values: S('B_band_tect_avg') },
     ],
     note: '연변 길이는 3° 칸에서 잰다. 현재 대륙을 통째로 돌려 잰 길이(기준값)의 오차는 ±2.5%다. 폭 121 km는 현재 대륙붕 32.24백만 km²(Harris et al. 2014)를 기준값으로 나눈 값이다.',
+  }));
+}
+
+function volumeCharts() {
+  charts.push(timeChart($('chart-volume'), {
+    unit: '현재 = 1', yMin: 0.6, yMax: 1.1, onPick: pick,
+    series: [
+      { label: '추적 면적 전체', short: '추적 전체', color: 'var(--series-1)', values: S('tracked_volume_ratio'), digits: 3 },
+      { label: '판 겹침 제거', short: '겹침 제거', color: 'var(--series-3)', values: S('dedup_volume_ratio'), digits: 3 },
+      { label: '겹침과 그때 없던 지괴 제거', short: '지괴도 제거', color: 'var(--series-2)', values: S('dedup_without_far_volume_ratio'), digits: 3 },
+    ],
+    note: '두께는 PaleoDEM 고도에서 바닷물 하중을 빼고 현대 CRUST1.0의 고도별 평균 두께로 바꿨다. 고생대 대륙의 열 상태가 달랐다면 같은 고도에 다른 두께가 대응한다.',
+  }));
+  charts.push(timeChart($('chart-volume-parts'), {
+    unit: '현재 = 1', yMin: 0.6, yMax: 1.1, onPick: pick,
+    series: [
+      { label: '면적', short: '면적', color: 'var(--series-1)', values: S('volume_area_ratio'), digits: 3 },
+      { label: '평균 두께', short: '평균 두께', color: 'var(--series-2)', values: S('volume_thickness_ratio'), digits: 3 },
+    ],
   }));
 }
 

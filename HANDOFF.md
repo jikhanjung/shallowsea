@@ -28,6 +28,7 @@
 | PaleoDEM 1°·0.1° 109장의 값별 면적과 지도별 단일값 | `scripts/depth_classes.py` | `results/depth_classes.csv`, `results/depth_classes_summary.csv` |
 | 회전한 지각과 DEM의 정렬: 깊은 지각, 판 겹침, 중복 제거 면적, 회전 나이 시험 | `scripts/alignment.py` (공용 모듈 `crust_points.py`) | `results/alignment_summary.csv`, `alignment_plates.csv`, `alignment_age_shift.csv` |
 | Macrostrat 북미 해성층 단면 면적과 같은 범위의 모델 잠김 비교 | `scripts/macrostrat_compare.py` | `results/macrostrat_north_america.csv`, `macrostrat_columns_agreement.csv` |
+| 아틀라스 그림과 DEM을 겹쳐 해수면 표와 지도 번호 대응을 확인. 다른 스크립트의 아틀라스 해수면은 이 대응을 따른다 | `scripts/atlas_check.py` | `results/atlas_sea_level_check.csv` |
 | 단계별 결과 웹 페이지 자료 | `scripts/build_site_data.py` | `web/data/`(git 제외), 페이지는 `web/`, 이미지는 `deploy/` |
 
 PaleoCoastlines `areas.csv`로 한 면적·부피 수지와 원본 PaleoDEM 전 지구 수심 면적은 스크립트 없이 devlog 001에 수치만 남아 있다.
@@ -38,7 +39,9 @@ PaleoCoastlines `areas.csv`로 한 면적·부피 수지와 원본 PaleoDEM 전 
 
 **얕은 바다를 수심으로 나누지 않고, 물가 아래로 잠긴 CRUST1.0 대륙지각의 면적·부피를 센다**([devlog 004](devlog/20261114_004_waterline_definition.md), 2026-11-14 사용자와 정함). 물가는 PaleoAtlas 지도에 적힌 해수면이 기본이고(판이 여럿이면 범위), 해수면 0은 민감도다. 보간 지도 23개는 아틀라스 해수면이 없어 해수면 0 결과만 있다.
 
-이 정의에서 캄브리아기(500 Ma 99.1, 520 Ma 104.9백만 km²)는 가장 많지 않다. 데본기·실루리아기·오르도비스기(380 Ma 114.8, 425 Ma 114.0, 480 Ma 111.7)가 더 크다. 다만 아틀라스 해수면은 지도마다 다른 계통역(최대 범람면, 초층서 경계 등)을 그린 Scotese의 해석이라, 시점끼리 비교하면 고해수면 지도와 저해수면 지도가 섞인다.
+아틀라스 해수면 표와 지도 번호 대응은 그림을 DEM과 겹쳐 확인했다([devlog 008](devlog/20261114_008_atlas_sea_level_check.md)). 108장 모두 92.7–98.6% 일치하고, 번호가 어긋난 5장(Map 60, 61, 79, 85)은 그림이 맞는 DEM에 대응시켰다. 해수면과 같은 값의 칸을 바다로 칠했는지는 지도마다 달라 아틀라스 기준 면적은 "칸 제외/포함" 범위로 본다.
+
+이 정의에서 캄브리아기(500 Ma 99.1–101.0, 520 Ma 104.9–108.8백만 km²)는 가장 많지 않다. 데본기·실루리아기·오르도비스기(380 Ma 114.8–118.4, 425 Ma 114.0–117.3, 480 Ma 111.7–117.0)가 더 크다. 다만 아틀라스 해수면은 지도마다 다른 계통역(최대 범람면, 초층서 경계 등)을 그린 Scotese의 해석이라, 시점끼리 비교하면 고해수면 지도와 저해수면 지도가 섞인다.
 
 **북미에서는 Macrostrat 해성층 기록도 같은 방향이다**([devlog 006](devlog/20261114_006_macrostrat_north_america.md)). 해성층 단면 면적은 450 Ma(9.9백만 km²)에 정점이 있고 500 Ma는 6.4, 520 Ma는 2.8이다. 모델과의 순위 상관은 고생대 0.81이다. 다만 Scotese가 해수면을 침수 증거에 맞췄고 같은 문헌을 썼을 수 있어 독립 검증이 아니라 일관성 검사다. 모델은 고생대 북미의 60–90%를 잠기게 하는데, 해성층 단면은 그 절반 이하이고 비해성층만 있는 단면도 상당수 잠긴다.
 

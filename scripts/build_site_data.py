@@ -16,7 +16,7 @@ from pathlib import Path
 import numpy as np
 
 import alignment as al
-from crust_points import ROOT, dem_files, read_dem, sample
+from crust_points import ROOT, atlas_levels, dem_files, read_dem, sample
 from macrostrat_compare import column_points, is_marine, load_macrostrat
 
 OUT = ROOT / 'web' / 'data'
@@ -62,10 +62,7 @@ def crust_codes(z, level, g1, plat, plon, valid, factor):
 
 def main():
     (OUT / 'dem').mkdir(parents=True, exist_ok=True)
-    atlas = collections.defaultdict(list)
-    with open(ROOT / 'docs/paleoatlas_sea_levels.csv') as f:
-        for r in csv.DictReader(f):
-            atlas[r['atlas_map']].append({'level': int(r['sea_level_m']), 'tract': r['systems_tract']})
+    atlas = atlas_levels()
     files_1 = sorted(dem_files('dem.zip'), key=lambda r: r[1])
     files_6 = {round(a): n for m, a, n in dem_files('dem_6min.zip')}
     classes = {round(float(r['age_ma'])): r for r in read_csv('depth_classes_summary.csv') if r['resolution'] == '6min'}
@@ -125,6 +122,7 @@ def main():
             'sub_sl0': num(zero['submerged_million_km2']),
             'sub_atlas_min': min((num(r['submerged_million_km2']) for r in atl), default=None),
             'sub_atlas_max': max((num(r['submerged_million_km2']) for r in atl), default=None),
+            'sub_atlas_max_incl': max((num(float(r['submerged_million_km2']) + float(r['at_waterline_million_km2'])) for r in atl), default=None),
             'dedup_sl0': num(a['dedup_submerged_sea_level_0']), 'dedup_atlas_max': num(a['dedup_submerged_atlas_max']),
             'deep': num(a['deep_1deg']), 'deep_margin': num(a['deep_margin']),
             'deep_craton': num(a['deep_precambrian_craton']), 'deep_orogen': num(a['deep_phanerozoic_orogen_arc_rift']),
@@ -151,7 +149,13 @@ def main():
         shift[r['age_ma']][r['shift_myr']] = [num(r['elevation_correlation']), num(r['craton_on_continent_share'])]
     plates = [r for r in read_csv('alignment_plates.csv') if r['age_ma'] == '500']
     plates = sorted(plates, key=lambda r: -float(r['deep_farther_than_3deg']))[:10]
-    json.dump({'ages': ages, 'age_shift': shift,
+    map_age = {m: a for m, a, n in files_1}
+    check = [{'age': map_age[r['matched_dem_map']], 'atlas_map': r['atlas_map'], 'dem_map': r['matched_dem_map'],
+              'caption': int(r['caption_sea_level_m']), 'best': int(r['best_sea_level_m']),
+              'agree_caption': num(r['agreement_caption']), 'agree_incl': num(r[f"agree_{int(r['caption_sea_level_m']) + 40}"]),
+              'agree_best': num(r['agreement_best']), 'rival': r['best_rival_map'], 'agree_rival': num(r['agreement_best_rival'])}
+             for r in read_csv('atlas_sea_level_check.csv')]
+    json.dump({'ages': ages, 'age_shift': shift, 'atlas_check': check,
                'plates_500': [{k: (num(v) if k not in ('main_types', 'plate_id') else v) for k, v in r.items()} for r in plates]},
               open(OUT / 'summary.json', 'w'), separators=(',', ':'), ensure_ascii=False)
 

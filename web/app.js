@@ -75,8 +75,10 @@ const cellAt = (lon, lat) => Math.min(180, Math.floor(90.5 - lat)) * 360 + (Math
 
 // ---- 시점 ----
 let index = ages.findIndex(a => a.age === 500);
+// 슬라이더는 왼쪽이 오래된 시기, 오른쪽이 현재다. ages는 0 Ma부터 오래된 순이라 뒤집는다.
 const slider = $('age');
 slider.max = ages.length - 1;
+const toSlider = i => ages.length - 1 - i;
 const levelsText = a => (a.atlas.length ? a.atlas.map(x => (x.level > 0 ? '+' : '') + x.level + ' m').join(', ') : '없음(보간 지도)');
 function label(a) {
   const hist = a.history_age != null && a.history_age !== a.age ? ` (지도 나이 ${a.history_age} Ma)` : '';
@@ -223,10 +225,26 @@ function makeCharts() {
     unit: '백만 km²', onPick: pick,
     series: [
       { label: '아틀라스 해수면(판이 여럿이면 최대)', short: '아틀라스', color: 'var(--series-1)', values: S('sub_atlas_max'), connect: true },
+      { label: '아틀라스 해수면, 해수면과 같은 값의 칸도 잠김', short: '해수면 칸 포함', color: 'var(--series-1)', dash: true, values: S('sub_atlas_max_incl'), connect: true },
       { label: '아틀라스 해수면, 판 겹침 제거', short: '겹침 제거', color: 'var(--series-3)', values: S('dedup_atlas_max'), connect: true, labelDy: 12 },
       { label: '해수면 0', short: '해수면 0', color: 'var(--series-2)', dash: true, values: S('sub_sl0'), labelDy: -8 },
     ],
-    note: '아틀라스 해수면이 없는 보간 지도 23개는 아틀라스 선에서 건너뛴다(선은 이웃 시점을 잇는다).',
+    note: '아틀라스 해수면이 없는 보간 지도는 아틀라스 선에서 건너뛴다(선은 이웃 시점을 잇는다). 해수면과 같은 값의 칸을 Scotese가 바다로 칠했는지는 지도마다 다르다(008).',
+  }));
+  const check = summary.atlas_check;
+  charts.push(timeChart($('chart-atlas-diff'), {
+    kind: 'dots', unit: 'm', yMin: -280, yMax: 160, onPick: pick,
+    series: [{ label: '가장 잘 맞는 해수면 − 적은 해수면', color: 'var(--series-1)', values: check.map(c => [c.age, c.best - c.caption]), digits: 0 }],
+    note: '+40은 "해수면과 같은 값의 칸까지 바다"와 같다(격자 값이 40 m 간격). 0이나 +40에서 멀리 떨어진 점은 그 해수면 근처에 칸이 적어 일치율 차이가 작은 경우가 많다.',
+  }));
+  charts.push(timeChart($('chart-atlas-agree'), {
+    kind: 'dots', unit: '%', yMin: 90, yMax: 100, onPick: pick,
+    series: [
+      { label: '적은 해수면(같은 값 칸은 육지)', color: 'var(--series-1)', values: check.map(c => [c.age, c.agree_caption * 100]), digits: 1 },
+      { label: '적은 해수면(같은 값 칸도 바다)', color: 'var(--series-3)', values: check.map(c => [c.age, c.agree_incl * 100]), digits: 1 },
+      { label: '앞뒤 지도 중 가장 잘 맞는 DEM', color: 'var(--series-2)', values: check.map(c => [c.age, c.agree_rival * 100]), digits: 1 },
+    ],
+    note: '가로축은 그림을 대응시킨 DEM의 나이다. 주황 점이 파랑·청록보다 높은 그림은 이웃 DEM이 더 잘 맞는 경우다.',
   }));
   charts.push(timeChart($('chart-deep'), {
     unit: '백만 km²', onPick: pick,
@@ -275,7 +293,7 @@ function plateTable() {
 let token = 0;
 async function setIndex(i) {
   index = Math.max(0, Math.min(ages.length - 1, i));
-  slider.value = index;
+  slider.value = toSlider(index);
   const a = ages[index];
   $('age-label').innerHTML = label(a);
   const my = ++token;
@@ -299,7 +317,7 @@ current.dem0 = await dem(ages.findIndex(a => a.age === 0));
 makeCharts();
 plateTable();
 fetch('healthz').then(r => r.json()).then(h => { $('version').textContent = h.version; }).catch(() => { $('version').textContent = VERSION; });
-slider.addEventListener('input', () => setIndex(+slider.value));
+slider.addEventListener('input', () => setIndex(toSlider(+slider.value)));
 ['dem-fill'].forEach(id => $(id).addEventListener('change', drawDem));
 $('crust-waterline').addEventListener('change', drawCrust);
 $('align-waterline').addEventListener('change', drawAlign);
@@ -308,7 +326,8 @@ let timer = null;
 $('play').addEventListener('click', () => {
   if (timer) { clearInterval(timer); timer = null; $('play').textContent = '▶'; return; }
   $('play').textContent = '❚❚';
-  timer = setInterval(() => setIndex(index >= ages.length - 1 ? 0 : index + 1), 700);
+  // 재생은 오래된 시기에서 현재 쪽으로(오른쪽으로) 간다.
+  timer = setInterval(() => setIndex(index <= 0 ? ages.length - 1 : index - 1), 700);
 });
 matchMedia('(prefers-color-scheme: dark)').addEventListener('change', redrawAll);
 await setIndex(index);

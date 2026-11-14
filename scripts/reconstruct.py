@@ -3,7 +3,7 @@ import csv
 
 import numpy as np
 
-from crust_points import ROOT, Plates, dem_files, load_points, read_dem, sample
+from crust_points import ROOT, Plates, atlas_levels, dem_files, load_points, read_dem, sample
 
 lon, lat, kind, thickness, area, volume = load_points()
 plates = Plates(lon, lat)
@@ -17,11 +17,8 @@ def summarize(z,valid):
     assert np.isclose(sum(stats[1::2]),volume.sum()/1e9)
     return stats
 
-# 물가 기준(devlog 004): 해수면 0과 PaleoAtlas 지도에 적힌 해수면. 정수 번호 지도만 아틀라스 설정이 있다.
-atlas={}
-with open(ROOT / 'docs/paleoatlas_sea_levels.csv') as f:
-    for r in csv.DictReader(f):
-        atlas.setdefault(r['atlas_map'],[]).append(int(r['sea_level_m']))
+# 물가 기준(devlog 004): 해수면 0과 PaleoAtlas 지도에 적힌 해수면. 아틀라스 그림과 DEM의 대응은 devlog 008을 따른다.
+atlas={m:[a['level'] for a in v] for m,v in atlas_levels().items()}
 def submerged(z,valid,level):
     """물가 level(m) 기준 육지·물가·잠김·잠김 중 물가 아래 1,400 m보다 깊음·미해결의 면적(백만 km²)과 부피(십억 km³)."""
     masks=(valid&(z>level),valid&(z==level),valid&(z<level),valid&(z<level-1400),~valid)

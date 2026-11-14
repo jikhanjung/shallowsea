@@ -75,6 +75,18 @@ class Plates:
         return plat, plon
 
 
+def atlas_levels():
+    """PaleoDEM 지도 번호(1° 배포본) → 그 지도를 그린 아틀라스 판들 [{'level', 'tract', 'atlas_map'}].
+    대응은 그림과 DEM을 겹친 검사(results/atlas_sea_level_check.csv, devlog 008)를 따른다."""
+    import csv
+    out = {}
+    with open(ROOT / 'results/atlas_sea_level_check.csv') as f:
+        for r in csv.DictReader(f):
+            out.setdefault(r['matched_dem_map'], []).append(
+                {'level': int(r['caption_sea_level_m']), 'tract': r['systems_tract'], 'atlas_map': r['atlas_map']})
+    return out
+
+
 def dem_files(archive_name):
     """zip 안의 PaleoDEM 이름을 (지도 번호, 나이, 이름)으로. macOS 리소스 포크는 뺀다."""
     with zipfile.ZipFile(INPUTS / archive_name) as archive:

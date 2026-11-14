@@ -8,7 +8,7 @@
 - [Airy 등압평형 민감도 실험](results/airy_sensitivity.txt)
 - [PaleoDEM 원본의 수심 빈도 검사](results/depth_audit.txt)
 - [PaleoDEM 1°·0.1° 값별 면적](results/depth_classes.csv)과 [지도별 요약](results/depth_classes_summary.csv)
-- [PaleoAtlas 지도별 해수면 설정](docs/paleoatlas_sea_levels.csv)
+- [PaleoAtlas 지도별 해수면 설정](docs/paleoatlas_sea_levels.csv)과 [그림·DEM 대조](results/atlas_sea_level_check.csv)
 - [회전한 지각과 DEM의 정렬 검사](results/alignment_summary.csv): 깊은 지각, 판 겹침, 중복 제거 면적
 - [Macrostrat 북미 해성층과 모델 잠김 비교](results/macrostrat_north_america.csv)와 [단면 단위 일치표](results/macrostrat_columns_agreement.csv)
 
@@ -37,6 +37,7 @@ uv pip install -r requirements.txt   # 또는 python -m pip install -r requireme
 bash scripts/download.sh
 sha256sum -c docs/input-sha256.txt
 grep -v '^#' docs/macrostrat-sha256.txt | sha256sum -c   # 2026-11-14에 받은 Macrostrat. 다시 받으면 다를 수 있다
+python scripts/atlas_check.py            # 아틀라스 그림과 DEM 대응(devlog 008). 아래 스크립트가 이 결과를 읽는다
 python scripts/reconstruct.py
 python scripts/airy_sensitivity.py > results/airy_sensitivity.txt
 python scripts/depth_audit.py > results/depth_audit.txt

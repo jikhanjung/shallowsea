@@ -13,7 +13,7 @@ import json
 import numpy as np
 import pygplates as pg
 
-from crust_points import INPUTS, ROOT, Plates, dem_files, load_points, read_dem, sample
+from crust_points import INPUTS, ROOT, Plates, atlas_levels, dem_files, load_points, read_dem, sample
 
 MACRO = INPUTS / 'macrostrat'
 
@@ -61,10 +61,7 @@ def main():
     owner = column_points(columns, lon, lat)
     inside = owner >= 0
     plates = Plates(lon, lat)
-    atlas = {}
-    with open(ROOT / 'docs/paleoatlas_sea_levels.csv') as f:
-        for r in csv.DictReader(f):
-            atlas.setdefault(r['atlas_map'], []).append(int(r['sea_level_m']))
+    atlas = {m: [a['level'] for a in v] for m, v in atlas_levels().items()}
     col_ids = np.array(sorted(col_area))
     index = {c: i for i, c in enumerate(col_ids)}
     owner_index = np.array([index.get(c, -1) for c in owner])

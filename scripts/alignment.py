@@ -11,7 +11,7 @@ import csv
 
 import numpy as np
 
-from crust_points import RADIUS, ROOT, TYPE_GROUPS, Plates, dem_files, load_points, read_dem, sample
+from crust_points import RADIUS, ROOT, TYPE_GROUPS, Plates, atlas_levels, dem_files, load_points, read_dem, sample
 
 DEEP = -1400
 SHALLOW = -200
@@ -77,10 +77,7 @@ def coverage(plat, plon, valid):
 
 
 def main():
-    atlas = collections.defaultdict(list)
-    with open(ROOT / 'docs/paleoatlas_sea_levels.csv') as f:
-        for r in csv.DictReader(f):
-            atlas[r['atlas_map']].append(int(r['sea_level_m']))
+    atlas = {m: [a['level'] for a in v] for m, v in atlas_levels().items()}
     files_1 = {round(a): (m, n) for m, a, n in dem_files('dem.zip')}
     files_6 = {round(a): (m, n) for m, a, n in dem_files('dem_6min.zip')}
     z_modern = sample(read_dem('dem_6min.zip', files_6[0][1], (1801, 3601)), lat, lon, 0.1)

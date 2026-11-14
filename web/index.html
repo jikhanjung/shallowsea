@@ -108,6 +108,27 @@
   </figure>
 </section>
 
+<section id="s8" class="step">
+  <p class="step-no">008 · 아틀라스 해수면 검증</p>
+  <h2>옮겨 적은 해수면과 지도 번호 대응을 그림으로 확인했다</h2>
+  <div class="learned">
+    <h3>알아낸 것</h3>
+    <ul>
+      <li>PaleoAtlas 지도 그림 108장의 바다색 픽셀을 PaleoDEM과 겹치면, 옮겨 적은 해수면에서 92.7–98.6%(중앙값 96.2%)가 일치한다.</li>
+      <li>101장은 같은 번호의 DEM이 앞뒤 두 지도보다 잘 맞는다(차이 중앙값 2.2%p). 5장(Map 60 두 판, 61, 79, 85)은 이웃 DEM이 1.5%p 넘게 더 잘 맞아 그 DEM에 대응시켰다. 004의 순위는 바뀌지 않는다.</li>
+      <li>해수면과 같은 값의 칸을 바다로 칠했는지는 지도마다 다르다. 76장은 포함하는 쪽이 조금 더 맞고(180 Ma의 +40 m 판은 92.7% → 96.7%), 230·245·250·360 Ma 등은 빼는 쪽이 맞다. 그래서 아틀라스 기준 면적은 두 값을 범위로 본다.</li>
+    </ul>
+  </div>
+  <figure>
+    <h4 class="fig-title">그림을 가장 잘 재현하는 해수면 − 옮겨 적은 해수면 (m, 그림 한 장이 점 하나)</h4>
+    <div id="chart-atlas-diff"></div>
+  </figure>
+  <figure>
+    <h4 class="fig-title">픽셀 일치율 (%)</h4>
+    <div id="chart-atlas-agree"></div>
+  </figure>
+</section>
+
 <section id="s5" class="step">
   <p class="step-no">005 · 정렬 검사</p>
   <h2>판 모델과 DEM은 맞는다. 그러나 현대 지각을 되돌리면 면적이 부풀려진다</h2>

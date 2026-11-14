@@ -198,3 +198,4 @@ main > .step { border-bottom: 0; padding-top: 28px; }
 main > .step[hidden] { display: none; }
 .small { font-size: 14px; }
 @media (min-width: 760px) { .tabs-inner { flex-wrap: wrap; overflow-x: visible; } }
+h3.sub { margin: 24px 0 8px; font-size: 16px; color: var(--text-primary); }

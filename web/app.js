@@ -2,7 +2,7 @@ import { MollweideMap } from './mollweide.js';
 import { categoryBars, timeChart, valueBars } from './charts.js';
 
 const $ = id => document.getElementById(id);
-const VERSION = 'v0.1.0';
+const VERSION = '로컬';
 const CELLS = 181 * 360;
 
 // ---- 색: CSS 변수를 읽어 Uint32(RGBA, 리틀 엔디언)로 ----

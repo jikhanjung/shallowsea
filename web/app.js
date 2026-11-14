@@ -359,6 +359,15 @@ function volumeCharts() {
     ],
     note: 'Scotese 고도를 "등압평형 고도 − Δ"로 보고 두께로 바꾼 평균 두께 / 현재(그때 없던 지괴·겹침 제외). Δ는 동적 지형 등으로 눌린 높이다.',
   }));
+  charts.push(timeChart($('chart-craton-elev'), {
+    unit: 'm', yMin: -200, yMax: 800, onPick: pick,
+    series: [
+      { label: '북미 안정지괴', short: '북미', color: 'var(--series-1)', values: S('craton_dry_1'), digits: 0 },
+      { label: '아프리카 안정지괴', short: '아프리카', color: 'var(--series-2)', values: S('craton_dry_7'), digits: 0 },
+      { label: '남미 안정지괴', short: '남미', color: 'var(--series-3)', values: S('craton_dry_2'), digits: 0 },
+    ],
+    note: '아프리카는 지금 초팽창으로 약 700 m 떠받쳐져 있다(015). 오늘의 높이가 지도에 옮겨졌다면 아프리카가 시대마다 남미보다 비슷하게 높아야 하지만, 캄브리아기에는 남미가 더 높게 칠해져 있다(017).',
+  }));
   charts.push(timeChart($('chart-volume-parts'), {
     unit: '현재 = 1', yMin: 0.6, yMax: 1.1, onPick: pick,
     series: [

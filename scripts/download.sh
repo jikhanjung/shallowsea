@@ -8,7 +8,7 @@ crust=https://igppweb.ucsd.edu/~gabi/crust1
 download() {
     local url="$1" target="$2"
     if [[ ! -s "$target" ]]; then
-        curl --fail --location --retry 2 "$url" -o "$target.part"
+        curl --fail --location --retry 2 -A "shallowsea-research-script" "$url" -o "$target.part"
         mv "$target.part" "$target"
     fi
 }
@@ -23,4 +23,9 @@ zenodo=https://zenodo.org/api/records/5460860/files
 download "$zenodo/Scotese_Wright_2018_Maps_1-88_6minX6min_PaleoDEMS_nc.zip/content" dem_6min.zip
 download "$zenodo/Scotese_Wright2018_PALEOMAP_PaleoDEMs.pdf/content" paleodem_report.pdf
 download "$zenodo/PALEOMAP_PaleoAtlases.zip/content" paleoatlases.zip
+# Macrostrat 북미(project 1) 단위와 단면 (devlog 006). 계속 갱신되는 자료라 받은 날짜의 체크섬은
+# docs/macrostrat-sha256.txt에 따로 둔다. 다시 받으면 값이 달라질 수 있다.
+mkdir -p macrostrat
+download "https://macrostrat.org/api/v2/units?project_id=1&response=long" macrostrat/units_project1.json
+download "https://macrostrat.org/api/v2/columns?project_id=1&response=long&format=geojson_bare" macrostrat/columns_project1.geojson
 unzip -jo plates.zip '*PlateModel.rot' '*PlatePolygons.gpml'

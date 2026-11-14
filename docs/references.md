@@ -18,3 +18,11 @@
 - Immenhauser (2009), [Estimating palaeo-water depth from the physical rock record](https://www.sciencedirect.com/science/article/abs/pii/S0012825209000865). 퇴적상과 파랑기저면에서 절대 수심을 추정할 때의 한계를 검토한다.
 - Harris et al. (2014), [Geomorphology of the oceans](https://doi.org/10.1016/j.margeo.2014.01.011), Table 5. 현대 대륙붕 지형 분류다.
 - Karlstrom et al. (2020), [Tonto Group 연대 재보정](https://doi.org/10.1130/G46751.1), [후속 Tonto Group 연구](https://www.cambridge.org/core/journals/geological-magazine/article/new-insights-into-cambrian-time-and-the-sauk-transgression-from-the-grand-canyon/D12F409D6F52917F5062A320B28B86BA).
+- Wang et al. (2023), [Quantitative characterization of orogens through isotopic mapping](https://doi.org/10.1038/s43247-023-00779-5), Commun. Earth Environ. 4:110, 공개. Nd 동위원소 지도로 낸 신생 지각 면적 비율: 알타이드 약 58%, 북미 코딜레라 약 54%(devlog 018).
+- Jahn, Wu & Chen (2000), [Massive granitoid generation in Central Asia: Nd isotope evidence and implication for continental growth in the Phanerozoic](https://doi.org/10.18814/epiiugs/2000/v23i2/001). 화강암류 맨틀 몫 70–100%, 관입 대부분 500–120 Ma(초록).
+- Jahn (2004), [The Central Asian Orogenic Belt and growth of the continental crust in the Phanerozoic](https://doi.org/10.1144/gsl.sp.2004.226.01.05). 맨틀 몫 60–100%, 500–100 Ma 성장(초록).
+- Kröner et al. (2014), [Reassessment of continental growth during the accretionary history of the Central Asian Orogenic Belt](https://doi.org/10.1016/j.gr.2012.12.023). 신생 지각 생산이 크게 과대평가되었다(초록). 비율 수치는 확인 안 함.
+- Safonova (2017), [Juvenile versus recycled crust in the Central Asian Orogenic Belt](https://doi.org/10.1016/j.gr.2016.09.003). 저어콘 Hf는 재순환 지각의 큰 몫을 보인다(검색 결과의 초록 일부).
+- Samson et al. (1989), [Evidence from neodymium isotopes for mantle contributions to Phanerozoic crustal genesis in the Canadian Cordillera](https://doi.org/10.1038/337705a0). Alexander·Stikine 지괴는 맨틀 기원 지각(검색 결과의 초록 요약).
+- Condie (2003), [Supercontinents, superplumes and continental growth: the Neoproterozoic record](https://doi.org/10.1144/gsl.sp.2003.206.01.02). 현생누대 평균 대륙 성장률 연 약 1 km³(초록).
+- Mortimer et al. (2017), [Zealandia: Earth's Hidden Continent](https://doi.org/10.1130/gsatg321a.1). 4.9백만 km² 대륙지각, 94%가 잠김(초록).

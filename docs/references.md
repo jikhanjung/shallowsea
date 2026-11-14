@@ -26,3 +26,4 @@
 - Samson et al. (1989), [Evidence from neodymium isotopes for mantle contributions to Phanerozoic crustal genesis in the Canadian Cordillera](https://doi.org/10.1038/337705a0). Alexander·Stikine 지괴는 맨틀 기원 지각(검색 결과의 초록 요약).
 - Condie (2003), [Supercontinents, superplumes and continental growth: the Neoproterozoic record](https://doi.org/10.1144/gsl.sp.2003.206.01.02). 현생누대 평균 대륙 성장률 연 약 1 km³(초록).
 - Mortimer et al. (2017), [Zealandia: Earth's Hidden Continent](https://doi.org/10.1130/gsatg321a.1). 4.9백만 km² 대륙지각, 94%가 잠김(초록).
+- Merdith et al. (2021), [Extending full-plate tectonic models into deep time: Linking the Neoproterozoic and the Phanerozoic](https://doi.org/10.1016/j.earscirev.2020.103477), Earth-Science Reviews 214:103477. 판 모델 v1.2.4([Zenodo 13635864](https://zenodo.org/records/13635864), CC BY 4.0)의 회전 파일과 대륙 다각형을 쓴다(devlog 019).

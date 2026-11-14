@@ -30,6 +30,10 @@ download "https://ars.els-cdn.com/content/image/1-s2.0-S1342937X22002192-mmc1.xl
 # 현재 대륙 잔차 지형(Stephenson et al. 2024, CC BY 4.0, devlog 015).
 mkdir -p residual
 download "https://zenodo.org/api/records/10633081/files/sstephenson2/global-residual-topography-v1.0.1.zip/content" residual/global-residual-topography-v1.0.1.zip
+# Merdith et al. (2021) 1 Ga 판 모델 v1.2.4 (Zenodo 13635864, CC BY 4.0, devlog 019). 풀어서 쓴다.
+mkdir -p merdith2021
+download "https://zenodo.org/api/records/13635864/files/Merdith_etal_2021_ESR_v1.2.4.zip/content" merdith2021/Merdith_etal_2021_ESR_v1.2.4.zip
+unzip -qo merdith2021/Merdith_etal_2021_ESR_v1.2.4.zip -d merdith2021/v1.2.4
 # Macrostrat 북미(project 1) 단위와 단면 (devlog 006). 계속 갱신되는 자료라 받은 날짜의 체크섬은
 # docs/macrostrat-sha256.txt에 따로 둔다. 다시 받으면 값이 달라질 수 있다.
 mkdir -p macrostrat

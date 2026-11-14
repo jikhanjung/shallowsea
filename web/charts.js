@@ -157,3 +157,40 @@ export function valueBars(host, { values, data, reference, highlight, color, hig
     hitbox.addEventListener('pointerleave', () => { tip.hidden = true; });
   });
 }
+
+// 범주별 묶음 막대: 범주(지역)마다 계열 수만큼 막대를 나란히 둔다. 값이 음수일 수 있다.
+export function categoryBars(host, { categories, series, unit, yMin = null, yMax = null, note = '' }) {
+  host.innerHTML = '';
+  host.classList.add('chart');
+  legend(host, series);
+  const W = 760, H = 280, m = { l: 48, r: 16, t: 28, b: 44 };
+  const svg = el('svg', { viewBox: `0 0 ${W} ${H}`, role: 'img', 'aria-label': series.map(s => s.label).join(', ') }, host);
+  const all = series.flatMap(s => s.values);
+  const lo = yMin ?? Math.min(0, ...all), hi = yMax ?? niceMax(Math.max(...all));
+  const y = v => m.t + (hi - v) / (hi - lo) * (H - m.t - m.b);
+  for (const t of ticks(lo, hi)) {
+    el('line', { x1: m.l, x2: W - m.r, y1: y(t), y2: y(t), class: t === 0 ? 'baseline' : 'gridline' }, svg);
+    el('text', { x: m.l - 6, y: y(t) + 4, class: 'tick', 'text-anchor': 'end' }, svg).textContent = t;
+  }
+  el('text', { x: 4, y: 4, class: 'axis-label', 'dominant-baseline': 'hanging' }, svg).textContent = unit;
+  const gw = (W - m.l - m.r) / categories.length;
+  const bw = Math.min(28, (gw - 12) / series.length);
+  const tip = tooltip(host);
+  categories.forEach((c, i) => {
+    const x0 = m.l + i * gw + (gw - bw * series.length - 2 * (series.length - 1)) / 2;
+    series.forEach((s, k) => {
+      const v = s.values[i];
+      const top = y(Math.max(0, v)), bottom = y(Math.min(0, v));
+      el('rect', { x: x0 + k * (bw + 2), y: top, width: bw, height: Math.max(1, bottom - top), rx: 3, style: `fill:${s.color}` }, svg);
+    });
+    el('text', { x: m.l + i * gw + gw / 2, y: H - m.b + 18, class: 'tick', 'text-anchor': 'middle' }, svg).textContent = c;
+    const hit = el('rect', { x: m.l + i * gw, y: m.t, width: gw, height: H - m.t - m.b, fill: 'transparent' }, svg);
+    hit.addEventListener('pointermove', evt => {
+      tip.innerHTML = `<div class="tip-head">${c}</div>` + series.map(s => `<div><i class="swatch" style="--c:${s.color}"></i>${s.label}: <b>${fmt(s.values[i], 1)}</b></div>`).join('');
+      const hr = host.getBoundingClientRect();
+      placeTip(tip, host, evt.clientX - hr.left, evt.clientY - hr.top);
+    });
+    hit.addEventListener('pointerleave', () => { tip.hidden = true; });
+  });
+  if (note) { const p = document.createElement('p'); p.className = 'chart-note'; p.textContent = note; host.appendChild(p); }
+}

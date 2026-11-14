@@ -1,5 +1,5 @@
 import { MollweideMap } from './mollweide.js';
-import { timeChart, valueBars } from './charts.js';
+import { categoryBars, timeChart, valueBars } from './charts.js';
 
 const $ = id => document.getElementById(id);
 const VERSION = 'v0.1.0';
@@ -349,6 +349,18 @@ function volumeCharts() {
   }));
 }
 
+function drawRegions() {
+  const rows = summary.regions[`${ages[index].age}`] || [];
+  categoryBars($('chart-regions'), {
+    categories: rows.map(r => r[0]), unit: '%', yMin: -10, yMax: 40,
+    series: [
+      { label: '면적 몫(그때 없던 지괴·판 겹침)', color: 'var(--series-1)', values: rows.map(r => r[1]) },
+      { label: '두께 몫(Scotese 고도로 낸 두께가 얇음)', color: 'var(--series-2)', values: rows.map(r => r[2]) },
+    ],
+    note: '지역은 PALEOMAP 판 번호의 첫 자리로 묶었다. 기준은 0 Ma 지도에서 같은 방법으로 낸 두께다. 두께 몫이 음수면 그 지역을 지금보다 높게 칠했다는 뜻이다.',
+  });
+}
+
 function drawHist() {
   const a = ages[index];
   const values = [];
@@ -376,7 +388,7 @@ async function setIndex(i) {
   const grid = await dem(index);
   if (my !== token) return;
   current.grid = grid;
-  drawDem(); drawCrust(); drawAlign(); drawMacro(); drawHist();
+  drawDem(); drawCrust(); drawAlign(); drawMacro(); drawHist(); drawRegions();
   charts.forEach(c => c.setAge(a.age));
   for (const d of [-1, 1]) if (ages[index + d]) dem(index + d);
 }

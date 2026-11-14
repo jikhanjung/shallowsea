@@ -173,7 +173,13 @@ def main():
               'agree_caption': num(r['agreement_caption']), 'agree_incl': num(r[f"agree_{int(r['caption_sea_level_m']) + 40}"]),
               'agree_best': num(r['agreement_best']), 'rival': r['best_rival_map'], 'agree_rival': num(r['agreement_best_rival'])}
              for r in read_csv('atlas_sea_level_check.csv')]
-    json.dump({'ages': ages, 'age_shift': shift, 'atlas_check': check,
+    regions = collections.defaultdict(list)
+    for r in read_csv('crust_volume_by_region.csv'):
+        if r['group'] == '9':
+            continue
+        ref = float(r['reference_volume'])
+        regions[r['age_ma']].append([r['region'], round(100 * float(r['area_loss']) / ref, 2), round(100 * float(r['thickness_loss']) / ref, 2)])
+    json.dump({'ages': ages, 'age_shift': shift, 'atlas_check': check, 'regions': regions,
                'plates_500': [{k: (num(v) if k not in ('main_types', 'plate_id') else v) for k, v in r.items()} for r in plates]},
               open(OUT / 'summary.json', 'w'), separators=(',', ':'), ensure_ascii=False)
 

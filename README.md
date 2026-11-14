@@ -12,7 +12,7 @@
 - [독립 해수면(van der Meer et al. 2022)으로 센 잠긴 대륙지각](results/independent_sea_level.csv)
 - [연구의 근거와 검증](docs/rationale.md)
 - [대륙 연변 길이와 대륙붕 면적](results/margin_length.csv)
-- [Scotese 지형이 담는 대륙지각 부피](results/crust_volume.csv)
+- [Scotese 지형이 담는 대륙지각 부피](results/crust_volume.csv)와 [지역별 부족](results/crust_volume_by_region.csv)
 - [회전한 지각과 DEM의 정렬 검사](results/alignment_summary.csv): 깊은 지각, 판 겹침, 중복 제거 면적
 - [Macrostrat 북미 해성층과 모델 잠김 비교](results/macrostrat_north_america.csv)와 [단면 단위 일치표](results/macrostrat_columns_agreement.csv), [남미](results/macrostrat_south_america.csv)
 
@@ -52,6 +52,7 @@ python scripts/macrostrat_compare.py 8   # 남미
 python scripts/independent_sea_level.py
 python scripts/margin_length.py
 python scripts/crust_volume.py
+python scripts/crust_volume_by_region.py
 ```
 
 커밋된 결과(3e390d2)는 NumPy 2.3.5, pyGPlates 1.0.0, GDAL 3.10.3에서 만들었다. m710q에서 Python 3.13.17, NumPy 2.5.4, pyGPlates 1.0.0, GDAL 3.12.2로 다시 돌려 같은 결과를 얻었다(2026-11-14, [devlog 002](devlog/20261114_002_reproduce_on_m710q.md)). `airy_sensitivity.txt` 첫 줄의 합계 두 개는 마지막 자리가 다르게 나온다. 원자료와 인용은 [docs/references.md](docs/references.md)를 참조한다.

@@ -10,7 +10,9 @@
 - Young et al. (2022), [Long-term Phanerozoic sea level change from solid Earth processes](https://doi.org/10.1016/j.epsl.2022.117451), EPSL 584. 수치 자료는 공개되어 있지 않다.
 - Armstrong (1981), [Radiogenic isotopes: the case for crustal recycling on a near-steady-state no-continental-growth Earth](https://doi.org/10.1098/rsta.1981.0122). 대륙지각 부피 정상 상태 주장(docs/rationale.md).
 - Dhuime et al. (2012), [A change in the geodynamics of continental growth 3 billion years ago](https://doi.org/10.1126/science.1216066).
-- Scholl & von Huene (2009), [Implications of estimated magmatic additions and recycling losses at the subduction zones of accretionary (non-collisional) and collisional (suturing) orogens](https://doi.org/10.1144/sp318.4).
+- Scholl & von Huene (2009), [Implications of estimated magmatic additions and recycling losses at the subduction zones of accretionary (non-collisional) and collisional (suturing) orogens](https://doi.org/10.1144/sp318.4). 공급 약 2.7 AU, 재순환 약 3.2 AU, 현생누대 순성장 사실상 0(초록).
+- Clift, Schouten & Vannucchi (2009), [Arc-continent collisions, sediment recycling and the maintenance of the continental crust](https://doi.org/10.1144/sp318.3). 섭입 손실 약 3.0 AU + 충돌 약 0.4 AU(devlog 016).
+- Clift, Vannucchi & Morgan (2009), [Crustal redistribution, crust–mantle recycling and Phanerozoic evolution of the continental crust](https://doi.org/10.1016/j.earscirev.2009.10.003). 수치 확인 안 함.
 - Wise (1974), [Continental margins, freeboard and the volumes of continents and oceans through time](https://doi.org/10.1007/978-3-662-01141-6_4).
 - Stephenson et al. (2024), [Global Residual Topography v1.0.1](https://doi.org/10.5281/zenodo.10633081), CC BY 4.0. 현재 대륙 잔차 지형(지각 등압평형으로 설명되지 않는 높이, devlog 015).
 - Immenhauser (2009), [Estimating palaeo-water depth from the physical rock record](https://www.sciencedirect.com/science/article/abs/pii/S0012825209000865). 퇴적상과 파랑기저면에서 절대 수심을 추정할 때의 한계를 검토한다.

@@ -4,6 +4,8 @@
 
 **저장소**: `git@github.com:jikhanjung/shallowsea.git`, 브랜치 `main`.
 
+**웹 페이지**: https://shallowsea.nopeoplestime.info = `v0.1.0`(커밋 `2ed2e45`, [devlog 007](devlog/20261114_007_web_visualization.md)). dolfinid `/srv/shallowsea`, 컨테이너 `shallowsea-shallowsea-1`, `127.0.0.1:8019`, Nginx 사이트 `shallowsea`, 인증서 만료 2027-02-12(자동 갱신). 결과를 바꾸면 `scripts/build_site_data.py` → 이미지 빌드·push → `bash deploy/deploy.sh <판>`.
+
 ## 배경과 가설
 
 출발점은 “캄브리아기에 얕은 바다가 유난히 많았다”는 서술이다. 로렌시아의 소크 해침과 대륙 내부의 해성 퇴적층은 강한 지역 증거다. 그러나 다음 세 가지는 서로 다른 관측량이다.

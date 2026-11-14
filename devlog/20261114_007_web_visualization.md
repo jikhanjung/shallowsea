@@ -26,9 +26,15 @@
 - 컨테이너는 읽기 전용 루트, tmpfs, `cap_drop: ALL`(CHOWN·SETUID·SETGID·NET_BIND_SERVICE만 다시 줌), `no-new-privileges`로 떴다.
 - 처음 만든 nginx 설정에 `types { application/octet-stream bin; }`를 넣었더니 기본 MIME 표 전체를 덮어써 `index.html`이 내려받기로 나갔다. 그 줄을 지웠다(`.bin`은 기본 표에 이미 있다).
 
-## 배포
+## 배포 (2026-11-14)
 
-(배포 뒤 덧붙인다.)
+- 이미지 `honestjung/shallowsea:v0.1.0`(빌드 커밋 `2ed2e45`, `linux/amd64`)을 Docker Hub에 올렸다. digest `sha256:ceb28a69e1fce6da5a7d01e0cceca906051903e571bc310f0f0c95065fbcccff`이고, dolfinid에서 받은 이미지의 digest도 같다.
+- dolfinid: `/srv/shallowsea`(소유 honestjung)에 `docker-compose.yml`과 `.env`(`IMAGE_TAG=v0.1.0`)를 두고 컨테이너 `shallowsea-shallowsea-1`을 `127.0.0.1:8019`에 띄웠다. 쓰기 가능한 경로는 tmpfs뿐이다.
+- 사용자가 DNS A 레코드(`shallowsea.nopeoplestime.info` → 34.64.158.160)를 추가했다. 그 전에는 도메인의 기본 레코드(192.0.78.24/25)로 풀렸다.
+- Nginx: 처음에는 HTTP 설정(`host/shallowsea.nginx.http.conf`)으로 사이트를 열고, certbot webroot(`/srv/shallowsea/acme`)로 Let's Encrypt 인증서(ECDSA)를 받은 뒤 HTTPS 설정(`host/shallowsea.nginx.conf`)으로 바꿨다. 만료 2027-02-12, 갱신 hook `nginx -t && systemctl reload nginx`. 다른 사이트 설정은 건드리지 않았다. 바꿀 때마다 `nginx -t`를 통과시킨 뒤 reload했다.
+- 호스트 Nginx가 HTTP/1.0으로 프록시해 컨테이너의 `gzip_static`이 압축본을 주지 않았다(DEM 520 KB). `proxy_http_version 1.1`을 넣어 55 KB로 나가게 했다. 이미지는 다시 만들지 않았다.
+- 확인: `https://shallowsea.nopeoplestime.info/healthz` → `{"status":"ok","version":"v0.1.0","commit":"2ed2e45"}`, HTTP는 HTTPS로 301. 공개 주소를 Playwright로 1200 px 밝은 모드와 390 px 어두운 모드로 열어 콘솔 오류와 가로 넘침이 없음을 봤다.
+- 다음 판은 `deploy/VERSION`을 올리고 README의 빌드·push 순서 뒤 `bash deploy/deploy.sh <판>`으로 띄운다.
 
 ## 한계
 

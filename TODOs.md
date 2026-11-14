@@ -5,12 +5,12 @@
 
 순서와 근거는 [devlog P01](devlog/20261114_P01_validation_plan.md)에 있다. 단계 번호는 P01을 따른다.
 
-## 1. PaleoDEM 수심 등급표
+## 1. PaleoDEM 수심 등급과 얕은 바다의 정의
 
-- [ ] 109개 시점 전체의 고유 수심값별 면적표를 만든다(`scripts/depth_classes.py` → `results/depth_classes.csv`)
-- [ ] Scotese & Wright (2018) 문서에서 고환경 등급을 수심값으로 바꾼 규칙을 찾는다
-- [ ] 0.1° Zenodo 배포본에도 같은 계단이 있는지 확인한다
-- [ ] 결과에 따라 얕은 바다를 등급으로 다시 정의하고, 비교 가능한 시점 묶음을 정한다
+- [ ] **얕은 바다의 정의를 정한다**(사용자와). 후보는 해수면 0 고정에 단일값을 따로 보고하기, 아틀라스 해수면을 지도마다 적용하기, PaleoCoastlines 해안선을 쓰기다(devlog 003 "다음에 정할 것")
+- [ ] 정한 정의로 `reconstruct.py`(CRUST1.0 추적)와 `airy_sensitivity.py`의 비교 대상을 다시 계산한다. 150 m, 200 m 경계로 나눈 비교는 내린다
+- [ ] 아틀라스 그림의 해안선을 격자와 직접 겹쳐(Mollweide 변환) 해수면 설정과 지도 번호 대응을 확인한다
+- [ ] 0 m·+40 m 단일값이 바다인지 PaleoCoastlines와 대조한다
 
 ## 2. 정렬 검사, 판별·지역별 분포와 겹침
 

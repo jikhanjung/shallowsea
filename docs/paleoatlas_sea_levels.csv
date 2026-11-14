@@ -1,0 +1,111 @@
+atlas_map,atlas_age_ma,sea_level_m,systems_tract
+1,0.0,0,Transgressive Systems Tract
+2,0.021,-120,Anthropocene Supersequence Boundary
+3,3.7,0,Lowstand System Track
+3,3.7,-40,Lowstand System Track
+4,6.3,40,Maximum Flooding Surface
+5,10.5,80,Maximum Flooding Surface
+5,10.5,-80,Messinian Supersequence Boundary
+6,14.9,80,Maximum Flooding Surface
+7,19.5,40,Serravallian Supersequence Boundary
+7,19.5,80,Maximum Flooding Surface
+8,25.7,0,Aquitanian Supersequence Boundary
+8,25.7,40,Transgressive Systems Tract
+9,31.1,120,Maximum Flooding Surface
+10,35.6,40,Rupelian Supersequence Boundary
+10,35.6,80,Transgressive Systems Tract
+11,38.8,120,Transgressive Systems Tract
+12,44.6,120,Maximum Flooding Surface
+12,44.6,40,Lutetian Supersequence Boundary
+13,52.2,120,Maximum Flooding Surface
+14,55.8,80,Transgressive Systems Tract
+15,55.8,120,Maximum Flooding Surface
+15,55.8,40,Danian Supersequence Boundary
+16,,80,
+17,68,80,
+17,68,120,
+18,73.8,120,
+19,80.3,80,
+19,80.3,120,
+20,86,80,
+20,86,120,
+21,91.1,80,
+21,91.1,120,
+21,91.1,160,
+22,96.6,120,
+22,96.6,80,
+23,101.8,120,
+24,106,80,
+25,110,40,
+25,110,80,
+26,115.2,80,
+27,121.8,40,
+28,127.5,80,
+29,132,80,
+30,137,40,
+30,137,-40,
+31,143,0,
+31,143,80,
+32,145.5,80,Berriasian Supersequence Boundary
+33,148.2,40,Highstand System Track
+34,153.2,80,Maximum Flooding Surface
+35,158.4,80,Transgressive Systems Track
+36,164.5,40,Transgressive Systems Track
+37,169.7,0,Kimmeridgian-Oxfordian SSB
+37,169.7,40,Maximum Flooding Surface
+38,173.6,0,Bathonian-Bajocian SSB
+39,179.3,0,Toarcian Supersequence Boundary
+39,179.3,40,Maximum Flooding Surface
+40,186.3,40,Maximum Flooding Surface
+41,193,40,Transgressive Systems Track
+42,198,-40,Pliensbachian SSB
+43,201.6,-40,Lowstand System Track
+44,210,40,Maximum Flooding Surface
+45,222.6,40,Transgressive Systems Track
+46,232.9,40,Transgressive Systems Track
+47,241.5,0,Lowstand System Track
+48,248.5,40,Lowstand System Track
+49,251,40,Norian Supersequence Boundary
+50,255.7,-40,Transgressive Systems Track
+51,263.1,-80,Lowstand System Track
+52,268.2,40,Maximum Flooding Surface
+53,273.1,0,Highstand System Track
+54,280,80,Maximum Flooding Surface
+55,289.5,80,Maximum Flooding Surface
+56,296.8,40,Sakmarian Supersequence Boundary
+56,296.8,80,Maximum Flooding Surface
+57,301.2,40,Asselian Supersequence Boundary
+57,301.2,80,Maximum Flooding Surface
+58,305.3,120,Maximum Flooding Surface
+59,309.5,80,Transgressive Systems Track
+60,314.9,0,Bashkirian Supersequence Boundary
+60,314.9,40,Maximum Flooding Surface
+61,323.2,80,Maximum Flooding Surface
+62,332.5,80,Highstand System Track
+63,341.1,80,Maximum Flooding Surface
+64,352.3,120,Maximum Flooding Surface
+65,359.2,80,Transgressive Systems Track
+66,370.3,80,Tournasian Supersequence Boundary
+67,379.9,120,Maximum Flooding Surface
+68,388.2,40,Frasnian Supersequence Boundary
+69,394.3,40,Transgressive Systems Track
+70,402.3,40,Maximum Flooding Surface
+71,409.1,0,Emsian Supersequence Boundary
+72,413.6,0,Lochkovian Supersequence Boundary
+73,419.5,0,Lochkovian Supersequence Boundary
+74,425.6,80,Highstand System Track
+75,432.1,80,Maximum Flooding Surface
+76,439.8,0,Transgressive Systems Track
+77,444.7,-40,Llandoverian Supersequence Boundary
+78,448.3,120,Maximum Flooding Surface
+78,448.3,80,Lowstand System Track
+79,456,120,Maximum Flooding Surface
+80,464.5,-40,Llandeilian Supersequence Boundary
+81,473.4,-40,Arenigian Supersequence Boundary
+82,480,120,Maximum Flooding Surface
+83,488.3,80,Tremadocian Supersequence Boundary
+84,494,40,Croixian Supersequence Boundary
+85,510,40,Transgressive Systems Track
+86,520,40,Transgressive Systems Tract
+87,531.5,0,Albertan Supersequence Boundary
+88,542,0,Caerfaian Supersequence Boundary

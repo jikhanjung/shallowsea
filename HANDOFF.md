@@ -23,6 +23,7 @@
 | CRUST1.0 대륙지각을 PALEOMAP v3로 109개 시점(0–540 Ma)에 역회전해 PaleoDEM 수심대별 면적·부피 집계 | `scripts/reconstruct.py` | `results/PALEOMAP_CRUST1_0-540Ma.csv` |
 | 고도 분포 두 개(현대 지형, Airy)에 균일한 상대 해수면 변화를 주는 민감도 실험 | `scripts/airy_sensitivity.py` | `results/airy_sensitivity.txt` |
 | PaleoDEM 150–200 m 구간의 수심값 빈도와 위도별 면적 | `scripts/depth_audit.py` | `results/depth_audit.txt` |
+| PaleoDEM 1°·0.1° 109장의 값별 면적과 지도별 단일값 | `scripts/depth_classes.py` | `results/depth_classes.csv`, `results/depth_classes_summary.csv` |
 
 PaleoCoastlines `areas.csv`로 한 면적·부피 수지와 원본 PaleoDEM 전 지구 수심 면적은 스크립트 없이 devlog 001에 수치만 남아 있다.
 
@@ -30,8 +31,10 @@ PaleoCoastlines `areas.csv`로 한 면적·부피 수지와 원본 PaleoDEM 전 
 
 ## 함정
 
-- **PaleoDEM의 얕은 바다 수심은 계단형이다.** 500 Ma의 150–200 m 구간은 정확히 160 m와 200 m 두 값뿐이고, 현재(0 Ma)도 같다. 150 m나 200 m를 경계로 한 면적 비교("200 m 기준 현대의 약 3배, 150 m 기준 역전")는 이 계단에 좌우된다. 값이 어느 지도 제작 단계에서 배정됐는지는 아직 확인하지 못했다.
-- **시점 사이의 급변.** 0–200 m 추적 면적이 260 Ma 41.7 → 240 Ma 2.7 → 220 Ma 20.6(백만 km²)으로 움직인다. 지질 현상으로 읽기 전에 지도 제작 차이인지 확인해야 한다.
+- **PaleoDEM의 해수면 부근 값은 측정된 수심이 아니다**([devlog 003](devlog/20261114_003_paleodem_depth_classes.md)). 모든 값이 40 m 간격(256단계 그레이스케일)이다. 80–160 Ma와 250–540 Ma 지도는 대륙내해로 보이는 넓은 지역을 한 값으로 칠했고, 그 값이 지도마다 다르다: 대부분 −160 m, 250 Ma −40 m, 255 Ma −80 m, 230·235·245 Ma 0 m, 180·200·240 Ma +40 m. 500 Ma 0–200 m 58.7백만 km² 가운데 46.4가 −160 m 단일값이다. 그래서 해수면 0에서 150 m, 200 m 경계로 자른 비교(devlog 001의 "현대의 약 3배, 150 m 기준 역전", "88%가 150–200 m", Airy 실험의 150–200 m 표)는 칠한 값의 선택을 비교한 것이다.
+- **260 → 240 Ma의 급감(41.7 → 2.7)은 240 Ma 단일값이 +40 m라 육지로 세어진 결과다.** 230·235·245 Ma는 단일값이 정확히 0 m라 "0 < 수심" 기준에서 빠진다.
+- **Scotese의 PaleoAtlas 지도는 지도마다 다른 해수면(−120 ~ +160 m)으로 그려졌다**(`docs/paleoatlas_sea_levels.csv`). 해수면 0으로 센 면적은 Scotese가 그린 해안선과 다를 수 있다(245 Ma: 6.1 대 35.8).
+- **1°는 0.1°의 점 표본이다.** 1° 결과와 0.1° 결과의 차이는 표본 오차이고 독립 증거가 아니다. EarthByte와 Zenodo의 1° zip은 같은 파일이다.
 - **면적의 기준을 섞지 않는다.** PaleoDEM 원본 면적, Kocsis–Scotese −1,400 m 경계 집계, CRUST1.0 지각 추적 면적(판이 겹치면 중복 합산), 지도상 중복 제거 면적은 서로 다른 값이다.
 - **역회전은 복원이 아니다.** 현대 지각의 면적·두께를 그대로 옮긴 것이고 과거 지각 두께가 아니다.
 - **순환 검증을 피한다.** Kocsis–Scotese 해안선은 해양화석 위치로 보정됐다. 시점별 Scotese 육지 면적에 맞춘 해수면은 독립적인 고해수면 추정이 아니다.
@@ -39,4 +42,4 @@ PaleoCoastlines `areas.csv`로 한 면적·부피 수지와 원본 PaleoDEM 전 
 
 ## 다음
 
-순서는 [devlog P01](devlog/20261114_P01_validation_plan.md)의 계획을 따른다: 재현 환경 → PaleoDEM 수심 등급표 → 회전 모델과 DEM의 정렬 검사 → 독립 침수·수심 자료 → 독립 해수면과 지역 침강 → 면적·부피와 변형. 항목별 할 일은 [TODOs.md](TODOs.md)에 있다.
+순서는 [devlog P01](devlog/20261114_P01_validation_plan.md)의 계획을 따른다. 1단계의 집계는 끝났고 **얕은 바다의 정의를 정하는 일이 남았다**(devlog 003 끝의 세 후보). 그 다음은 회전 모델과 DEM의 정렬 검사 → 독립 침수·수심 자료 → 독립 해수면과 지역 침강 → 면적·부피와 변형. 항목별 할 일은 [TODOs.md](TODOs.md)에 있다.

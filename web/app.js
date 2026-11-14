@@ -263,6 +263,7 @@ function makeCharts() {
     note: '판 겹침의 계산 방식 오차(실제 겹침이 없는 강체 회전에서 나오는 값)는 약 1백만 km²다.',
   }));
   independentCharts();
+  marginChart();
   charts.push(timeChart($('chart-macro'), {
     unit: '백만 km²', onPick: pick,
     series: [
@@ -294,6 +295,18 @@ function independentCharts() {
       { label: '현대 모양에서 0–200 m 띠의 상한(28.2)', short: '상한', color: 'var(--text-muted)', dash: true, values: cap },
     ],
     note: '모델 B는 현대 대륙지각의 고도 분포(물·얼음 하중을 뺀 것)를 고정하고 해수면만 바꾼다. 대륙 배치·연변 길이·열침강은 넣지 않았다.',
+  }));
+}
+
+function marginChart() {
+  charts.push(timeChart($('chart-margin'), {
+    unit: '백만 km²', yMin: 0, yMax: 45, onPick: pick,
+    series: [
+      { label: '연변 길이 × 121 km (모든 추적 지각)', short: '모든 지각', color: 'var(--series-1)', values: S('shelf_harris_width') },
+      { label: '그때 없던 지괴를 뺌', short: '지괴 뺌', color: 'var(--series-2)', dash: true, values: S('shelf_harris_width_without_far') },
+      { label: '현대 대륙 모양의 0–200 m 띠(009, 판구조 해수면)', short: '0–200 m 띠', color: 'var(--series-3)', values: S('B_band_tect_avg') },
+    ],
+    note: '연변 길이는 3° 칸에서 잰다. 현재 대륙을 통째로 돌려 잰 길이(기준값)의 오차는 ±2.5%다. 폭 121 km는 현재 대륙붕 32.24백만 km²(Harris et al. 2014)를 기준값으로 나눈 값이다.',
   }));
 }
 

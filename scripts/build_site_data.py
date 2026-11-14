@@ -72,6 +72,7 @@ def main():
     align = {r['age_ma']: r for r in read_csv('alignment_summary.csv')}
     macro = {r['age_ma']: r for r in read_csv('macrostrat_north_america.csv')}
     indep = {r['age_ma']: r for r in read_csv('independent_sea_level.csv')}
+    margin = {r['age_ma']: r for r in read_csv('margin_length.csv')}
 
     units, columns = load_macrostrat()
     col_ids = [f['properties']['col_id'] for f in columns]
@@ -135,6 +136,7 @@ def main():
             'model_na_sl0': num(m['model_submerged_sea_level_0']),
             **{k: num(indep[key][k]) for k in ('tect_avg_m', 'tect_min_m', 'tect_max_m', 'tge_avg_m', 'A_tect_avg', 'A_band_tect_avg',
                                                'B_tect_avg', 'B_band_tect_avg', 'B_band_tect_min', 'B_band_tect_max', 'A_band_tge_avg', 'B_band_tge_avg')},
+            **{k: num(margin[key][k]) for k in ('margin_ratio', 'margin_without_far_ratio', 'shelf_harris_width', 'shelf_harris_width_without_far')},
         })
         print(key, flush=True)
     np.stack(crust_0).tofile(OUT / 'crust_sea_level_0.bin')

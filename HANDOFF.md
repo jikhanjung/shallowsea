@@ -30,6 +30,7 @@
 | Macrostrat 북미 해성층 단면 면적과 같은 범위의 모델 잠김 비교 | `scripts/macrostrat_compare.py` | `results/macrostrat_north_america.csv`, `macrostrat_columns_agreement.csv` |
 | 아틀라스 그림과 DEM을 겹쳐 해수면 표와 지도 번호 대응을 확인. 다른 스크립트의 아틀라스 해수면은 이 대응을 따른다 | `scripts/atlas_check.py` | `results/atlas_sea_level_check.csv` |
 | Scotese와 독립적인 해수면(van der Meer et al. 2022)으로 잠긴 대륙지각: Scotese 지형(모델 A)과 현대 대륙 모양 고정(모델 B) | `scripts/independent_sea_level.py` | `results/independent_sea_level.csv` |
+| 회전한 대륙지각의 연변 길이(3° 칸, 강체 회전 기준값 대비)와 대륙붕 폭을 고정했을 때의 대륙붕 면적 | `scripts/margin_length.py` | `results/margin_length.csv` |
 | 단계별 결과 웹 페이지 자료 | `scripts/build_site_data.py` | `web/data/`(git 제외), 페이지는 `web/`, 이미지는 `deploy/` |
 
 PaleoCoastlines `areas.csv`로 한 면적·부피 수지와 원본 PaleoDEM 전 지구 수심 면적은 스크립트 없이 devlog 001에 수치만 남아 있다.

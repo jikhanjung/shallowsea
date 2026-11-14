@@ -43,7 +43,7 @@ PaleoCoastlines `areas.csv`로 한 면적·부피 수지와 원본 PaleoDEM 전 
 
 ## 결론 초안
 
-[docs/conclusions.md](docs/conclusions.md)(2026-11-14, **초안, 사용자 확인 전**). 결론 C1–C9마다 근거 devlog와 한계([순환]·[역회전]·[칠한 값])를 붙였다. banjang이 맡긴 독립 검토(14개 지적)를 반영했다([devlog 016](devlog/20261114_016_conclusions_review.md)). 사용자 가설에 관한 문장(중심 문장, C6, C7, C9)은 banjang이 사용자에게 확인받는다. 웹 문구는 그 확인 뒤에 고친다.
+[docs/conclusions.md](docs/conclusions.md)(2026-11-14, **초안, 사용자 확인 전**). 결론 C1–C9마다 근거 devlog와 한계([순환]·[역회전]·[칠한 값])를 붙였다. banjang이 맡긴 독립 검토(14개 지적)를 반영했다([devlog 016](devlog/20261114_016_conclusions_review.md)). 사용자 가설에 관한 문장(중심 문장, C6, C7, C9)은 사용자가 [docs/conclusions_explained.md](docs/conclusions_explained.md)(풀이)로 나중에 다시 검토한다. 수치를 바꾸면 conclusions.md가 기준이고 풀이도 맞춘다. 웹 문구는 그 확인 뒤에 고친다.
 
 ## 지금 쓰는 정의
 

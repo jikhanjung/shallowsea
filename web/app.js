@@ -280,6 +280,15 @@ function makeCharts() {
     ],
     note: '단면마다 안에 든 대륙지각의 현대 고도(물·얼음 하중을 뺀 것) 중앙값을 그 단면이 잠기는 해수면으로 보고, 해성 단위가 있는 단면들의 면적 가중 중앙값을 냈다. 단면 일부만 잠겼어도 단면 전체를 세므로 크게 잡혔을 수 있다.',
   }));
+  charts.push(timeChart($('chart-needed-type'), {
+    unit: 'm', yMin: -400, yMax: 1600, onPick: pick,
+    series: [
+      { label: '북미 안정지괴 안쪽', short: '북미 안쪽', color: 'var(--series-1)', values: S('na_craton_excess'), digits: 0 },
+      { label: '북미 조산대', short: '북미 조산대', color: 'var(--series-2)', values: S('na_orogen_excess'), digits: 0 },
+      { label: '남미 안정지괴 안쪽', short: '남미 안쪽', color: 'var(--series-3)', values: S('sa_craton_excess'), digits: 0 },
+    ],
+    note: '0보다 크면 현대 모양과 독립 해수면으로는 그 단면들의 해성층을 담지 못한다. 단면 유형은 단면 안 CRUST1.0 표본점 면적이 가장 큰 현대 지각 유형이다.',
+  }));
   independentCharts();
   marginChart();
   volumeCharts();

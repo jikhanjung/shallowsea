@@ -74,6 +74,7 @@ def main():
     macro_sa = {r['age_ma']: r for r in read_csv('macrostrat_south_america.csv')}
     indep = {r['age_ma']: r for r in read_csv('independent_sea_level.csv')}
     margin = {r['age_ma']: r for r in read_csv('margin_length.csv')}
+    by_type = {(r['region'], r['age_ma']): r for r in read_csv('needed_sea_level_by_type.csv')}
     volume = {r['age_ma']: r for r in read_csv('crust_volume.csv')}
     v0 = volume['0']
     a0 = float(v0['dedup_without_far_area'])
@@ -144,6 +145,10 @@ def main():
             'sa_marine': num(macro_sa[key]['macrostrat_marine']), 'sa_atlas_max': num(macro_sa[key]['model_submerged_atlas_max']),
             'sa_modern': num(macro_sa[key]['modern_shape_submerged_tect_avg']),
             'sa_needed_sl': num(macro_sa[key]['modern_shape_sea_level_for_half_of_marine_columns_m']),
+            **{f'{rk}_{tk}_excess': (round(float(by_type[(rn, key)][f'{tn}_needed_sea_level_m']) - float(by_type[(rn, key)]['tect_avg_m']), 1)
+                                     if by_type[(rn, key)][f'{tn}_needed_sea_level_m'] else None)
+               for rk, rn in (('na', 'north_america'), ('sa', 'south_america'))
+               for tk, tn in (('craton', 'precambrian_craton'), ('orogen', 'phanerozoic_orogen_arc_rift'), ('margin', 'margin'))},
             **{k: num(indep[key][k]) for k in ('tect_avg_m', 'tect_min_m', 'tect_max_m', 'tge_avg_m', 'A_tect_avg', 'A_band_tect_avg',
                                                'B_tect_avg', 'B_band_tect_avg', 'B_band_tect_min', 'B_band_tect_max', 'A_band_tge_avg', 'B_band_tge_avg')},
             **{k: num(margin[key][k]) for k in ('margin_ratio', 'margin_without_far_ratio', 'shelf_harris_width', 'shelf_harris_width_without_far')},

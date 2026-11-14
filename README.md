@@ -49,6 +49,7 @@ python scripts/depth_classes.py
 python scripts/alignment.py
 python scripts/macrostrat_compare.py 1   # 북미
 python scripts/macrostrat_compare.py 8   # 남미
+python scripts/needed_sea_level_by_type.py
 python scripts/independent_sea_level.py
 python scripts/margin_length.py
 python scripts/crust_volume.py

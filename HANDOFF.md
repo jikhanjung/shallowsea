@@ -26,6 +26,7 @@
 | PaleoDEM 1°·0.1° 109장의 값별 면적과 지도별 단일값 | `scripts/depth_classes.py` | `results/depth_classes.csv`, `results/depth_classes_summary.csv` |
 | 회전한 지각과 DEM의 정렬: 깊은 지각, 판 겹침, 중복 제거 면적, 회전 나이 시험 | `scripts/alignment.py` (공용 모듈 `crust_points.py`) | `results/alignment_summary.csv`, `alignment_plates.csv`, `alignment_age_shift.csv` |
 | Macrostrat 북미 해성층 단면 면적과 같은 범위의 모델 잠김 비교 | `scripts/macrostrat_compare.py` | `results/macrostrat_north_america.csv`, `macrostrat_columns_agreement.csv` |
+| 단계별 결과 웹 페이지 자료 | `scripts/build_site_data.py` | `web/data/`(git 제외), 페이지는 `web/`, 이미지는 `deploy/` |
 
 PaleoCoastlines `areas.csv`로 한 면적·부피 수지와 원본 PaleoDEM 전 지구 수심 면적은 스크립트 없이 devlog 001에 수치만 남아 있다.
 

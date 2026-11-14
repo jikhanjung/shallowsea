@@ -12,6 +12,20 @@
 - [회전한 지각과 DEM의 정렬 검사](results/alignment_summary.csv): 깊은 지각, 판 겹침, 중복 제거 면적
 - [Macrostrat 북미 해성층과 모델 잠김 비교](results/macrostrat_north_america.csv)와 [단면 단위 일치표](results/macrostrat_columns_agreement.csv)
 
+## 웹 페이지
+
+단계별 결과를 회전 가능한 몰바이데 지도와 차트로 보여 주는 정적 페이지가 `web/`에 있다(devlog 007). 운영 주소는 https://shallowsea.nopeoplestime.info 이다.
+
+```bash
+python scripts/build_site_data.py        # web/data/ 생성 (아래 재현을 먼저 돌린다)
+python -m http.server -d web 8765        # 로컬에서 보기
+docker build --platform linux/amd64 -f deploy/Dockerfile \
+  --build-arg VERSION=$(cat deploy/VERSION) --build-arg COMMIT=$(git rev-parse --short HEAD) \
+  -t honestjung/shallowsea:$(cat deploy/VERSION) .
+docker push honestjung/shallowsea:$(cat deploy/VERSION)
+bash deploy/deploy.sh $(cat deploy/VERSION)   # dolfinid /srv/shallowsea, 127.0.0.1:8019
+```
+
 ## 재현
 
 Python 3.13(pyGPlates 1.0.0의 wheel은 cp38–cp313까지만 있어 3.14에는 설치되지 않는다), GDAL의 `gdal_translate`(NetCDF 드라이버 포함), curl, unzip이 필요하다. 최초 실행에서 공개 원본 자료를 내려받는다.

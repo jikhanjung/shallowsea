@@ -1,0 +1,22 @@
+# dolfinid /srv/shallowsea (devlog 007). IMAGE_TAG는 .env에 둔다.
+name: shallowsea
+services:
+  shallowsea:
+    image: honestjung/shallowsea:${IMAGE_TAG:?Set IMAGE_TAG}
+    ports:
+      - "127.0.0.1:${HOST_PORT:-8019}:80"
+    read_only: true
+    tmpfs:
+      - /var/cache/nginx
+      - /var/run
+      - /tmp
+    cap_drop:
+      - ALL
+    cap_add:
+      - CHOWN
+      - SETUID
+      - SETGID
+      - NET_BIND_SERVICE
+    security_opt:
+      - no-new-privileges:true
+    restart: unless-stopped

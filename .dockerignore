@@ -1,0 +1,4 @@
+*
+!web/
+!deploy/nginx.conf
+web/**/__pycache__

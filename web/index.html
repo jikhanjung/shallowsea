@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shallow Sea — 캄브리아기 얕은 바다 다시 보기</title>
+<meta name="description" content="PALEOMAP PaleoDEM, CRUST1.0, Macrostrat으로 캄브리아기 얕은 바다 면적을 단계별로 다시 계산한 기록">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cellipse cx='16' cy='16' rx='15' ry='8' fill='%232a78d6'/%3E%3Cellipse cx='16' cy='16' rx='9' ry='4' fill='%2386b6ef'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">shallowsea · 연구 기록</p>
+    <h1>캄브리아기에 얕은 바다가 <span class="nowrap">유난히 많았나?</span></h1>
+    <p class="lede">Scotese의 PALEOMAP 고지형(PaleoDEM)과 판 모델, 현대 지각 모델 CRUST1.0, 북미 층서 자료 Macrostrat으로 같은 질문을 단계별로 다시 계산했다. 단계마다 무엇을 알아냈는지와 그 근거를 보인다.</p>
+    <ol class="findings">
+      <li><b>PaleoDEM의 얕은 바다 수심은 측정값이 아니다.</b> 지도마다 대륙내해를 한 값(−160, −80, −40, 0, +40 m)으로 칠했다. "500 Ma 얕은 바다가 현재의 3배"는 그 칠한 값에 기댄 비교였다.</li>
+      <li><b>Scotese가 지도마다 정한 해수면으로 물에 잠긴 대륙지각을 세면 캄브리아기는 최대가 아니다.</b> 후기 오르도비스기–데본기가 더 넓다.</li>
+      <li><b>현대 지각을 되돌린 면적에는 두 가지 부풀림이 있다.</b> 그때 없던 지괴(500 Ma 약 20백만 km²)와 판 겹침(150 Ma 이후 약 15백만 km²).</li>
+      <li><b>북미 Macrostrat 해성층 기록도 같은 순서를 보인다.</b> 정점은 450 Ma 무렵이고 캄브리아기는 그보다 낮다. 다만 독립 검증이 아니라 일관성 검사다.</li>
+    </ol>
+  </div>
+</header>
+
+<nav class="agebar" aria-label="시점">
+  <div class="wrap agebar-inner">
+    <button id="play" class="btn" aria-label="시점 자동 재생">▶</button>
+    <input id="age" type="range" min="0" max="108" step="1" aria-label="시점 고르기">
+    <output id="age-label" class="age-label"></output>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<section id="s1" class="step">
+  <p class="step-no">001 · 출발점</p>
+  <h2>처음 계산: "500 Ma 얕은 바다는 현재의 약 3배"</h2>
+  <div class="tiles">
+    <div class="tile"><span class="tile-value">58.6</span><span class="tile-label">500 Ma, 0 &lt; 수심 ≤ 200 m<br>(PaleoDEM, 백만 km²)</span></div>
+    <div class="tile"><span class="tile-value">19.8</span><span class="tile-label">현재, 같은 기준</span></div>
+    <div class="tile"><span class="tile-value">7.1</span><span class="tile-label">500 Ma, 0 &lt; 수심 ≤ 150 m<br>— 기준을 50 m 바꾸면 순서가 뒤집힌다</span></div>
+  </div>
+  <p>처음 계산은 PaleoDEM 1° 격자에서 수심 0–200 m인 면적을 셌다. 경계를 150 m로 바꾸면 500 Ma가 현재보다 작아졌다. 이 이상한 민감도가 다음 단계의 출발점이었다. 같은 결과는 다른 기계(Python 3.13, NumPy 2.5, GDAL 3.12)에서도 바이트까지 재현됐다(002).</p>
+</section>
+
+<section id="s3" class="step">
+  <p class="step-no">003 · PaleoDEM의 값</p>
+  <h2>해수면 부근 값은 40 m 계단이고, 대륙내해는 지도마다 한 값으로 칠해져 있다</h2>
+  <div class="learned">
+    <h3>알아낸 것</h3>
+    <ul>
+      <li>원본은 0.1° 격자를 256단계 그레이스케일로 손으로 고친 것이다(Scotese &amp; Wright 2018 보고서). 그래서 모든 값이 40 m 간격이다. 1° 배포본은 0.1°의 점 표본이다.</li>
+      <li>80–160 Ma와 250–540 Ma 지도에는 넓은 지역을 한 값으로 칠한 흔적이 있다. 대부분 −160 m이지만 250 Ma −40, 255 Ma −80, 230·235·245 Ma 0, 180·200·240 Ma +40 m다.</li>
+      <li>500 Ma의 0–200 m 58.7백만 km² 가운데 46.4가 −160 m 한 값이다. 260 → 240 Ma의 급감은 240 Ma 지도가 그 값을 +40 m로 칠해 육지로 세어진 결과다.</li>
+      <li>Scotese의 PaleoAtlas 지도는 지도마다 다른 해수면(−120 ~ +160 m)으로 그려졌다. 단일값과 그 해수면 사이에는 일정한 관계가 없다.</li>
+    </ul>
+  </div>
+  <figure>
+    <div class="map-tools">
+      <label><input type="checkbox" id="dem-fill" checked> 단일값 칸 강조</label>
+      <button class="btn small" data-spin="map-dem">자동 회전</button>
+      <span class="readout" id="readout-dem"></span>
+    </div>
+    <div class="map" id="map-dem"></div>
+    <div class="map-legend" id="legend-dem"></div>
+    <figcaption>선택한 시점의 PaleoDEM(0.1° 격자에서 0.5°마다 뽑음). 강조한 칸은 그 지도의 단일값과 정확히 같은 칸이다. 좌우로 끌거나 화살표 키로 돌린다.</figcaption>
+  </figure>
+  <figure>
+    <h4 class="fig-title">선택한 시점의 값별 면적 <span class="muted">(막대, 백만 km²) · 가로 눈금은 현재(0 Ma)</span></h4>
+    <div id="chart-hist"></div>
+  </figure>
+  <figure>
+    <h4 class="fig-title">지도마다 칠한 단일값과 아틀라스 해수면 (m)</h4>
+    <div id="chart-fill"></div>
+  </figure>
+  <figure>
+    <h4 class="fig-title">해수면 0에서 0 &lt; 수심 ≤ 200 m 면적과, 해수면 이상에 칠한 단일값을 바다로 더한 면적 (백만 km²)</h4>
+    <div id="chart-shallow"></div>
+  </figure>
+</section>
+
+<section id="s4" class="step">
+  <p class="step-no">004 · 정의를 바꾼다</p>
+  <h2>수심으로 나누지 않고, 물가 아래로 잠긴 대륙지각을 센다</h2>
+  <div class="learned">
+    <h3>알아낸 것</h3>
+    <ul>
+      <li>물가는 Scotese가 아틀라스 지도마다 적은 해수면을 기본으로 쓰고, 해수면 0은 민감도로 둔다. 현대 CRUST1.0 대륙지각을 PALEOMAP 판으로 되돌려 물가 아래에 놓인 면적을 센다.</li>
+      <li>이 정의에서 캄브리아기(500 Ma 99.1, 520 Ma 104.9백만 km²)는 최대가 아니다. 380 Ma 114.8, 425 Ma 114.0, 480 Ma 111.7이 더 크다.</li>
+      <li>230·245 Ma의 급감은 사라진다(아틀라스 해수면 +40 m). 240 Ma는 Scotese가 저해수면기 지도로 그려 여전히 낮다.</li>
+      <li>아틀라스 해수면은 지도마다 최대 범람면, 초층서 경계 같은 다른 시기를 그린 해석이다. 시점끼리 비교하면 고해수면 지도와 저해수면 지도가 섞인다.</li>
+    </ul>
+  </div>
+  <figure>
+    <div class="map-tools">
+      <label>물가 <select id="crust-waterline"><option value="atlas">아틀라스 해수면</option><option value="sl0">해수면 0</option></select></label>
+      <button class="btn small" data-spin="map-crust">자동 회전</button>
+      <span class="readout" id="readout-crust"></span>
+    </div>
+    <div class="map" id="map-crust"></div>
+    <div class="map-legend" id="legend-crust"></div>
+    <figcaption>1° 고격자 칸마다 그 칸에 들어온 대륙지각 표본점의 면적이 가장 큰 상태. 아틀라스 해수면이 없는 보간 지도에서는 해수면 0을 쓴다.</figcaption>
+  </figure>
+  <figure>
+    <h4 class="fig-title">물가 아래로 잠긴 대륙지각 (백만 km²)</h4>
+    <div id="chart-submerged"></div>
+  </figure>
+</section>
+
+<section id="s5" class="step">
+  <p class="step-no">005 · 정렬 검사</p>
+  <h2>판 모델과 DEM은 맞는다. 그러나 현대 지각을 되돌리면 면적이 부풀려진다</h2>
+  <div class="learned">
+    <h3>알아낸 것</h3>
+    <ul>
+      <li>회전 나이를 ±5·10 Myr 비틀면 선캄브리아 안정지괴가 DEM 대륙 위에 놓이는 비율이 대부분 원래 나이에서 가장 높다. 회전 파일은 PaleoDEM과 같은 판 모델이다.</li>
+      <li>500 Ma에 물가 아래 1,400 m보다 깊은 곳에 놓인 대륙지각 31.3백만 km² 가운데 19.8이 얕은 곳에서 3° 넘게 떨어진 대양에 있다. 서시베리아·카자흐스탄, 몽골–아무르, 투란, 오호츠크, 북미 코딜레라, 서남극처럼 나중에 붙은 지괴다.</li>
+      <li>늘어난 대륙연변을 강체로 되돌려 150 Ma 이후 약 15백만 km²가 두 번 세어진다(남미–아프리카, 호주–남극 등). 겹친 셀을 셀 면적에 맞게 줄이면 아틀라스 해수면 기준 500 Ma 90.4, 380 Ma 107.1로, 순위는 같다.</li>
+    </ul>
+  </div>
+  <figure>
+    <div class="map-tools">
+      <label>물가 <select id="align-waterline"><option value="sl0">해수면 0</option><option value="atlas">아틀라스 해수면</option></select></label>
+      <button class="btn small" data-spin="map-align">자동 회전</button>
+      <span class="readout" id="readout-align"></span>
+    </div>
+    <div class="map" id="map-align"></div>
+    <div class="map-legend" id="legend-align"></div>
+    <figcaption>깊은 곳에 놓인 대륙지각을 얕은 곳(물가 아래 200 m 이내)까지의 거리로 나눴다. 점무늬는 판이 둘 이상 겹쳐 셀 면적을 넘은 칸이다.</figcaption>
+  </figure>
+  <figure>
+    <h4 class="fig-title">해수면 0에서 1,400 m보다 깊은 곳에 놓인 대륙지각, CRUST1.0 유형별 (백만 km²)</h4>
+    <div id="chart-deep"></div>
+  </figure>
+  <figure>
+    <h4 class="fig-title">판 겹침과, DEM에는 대륙인데 근처에 추적 지각이 없는 면적 (백만 km²)</h4>
+    <div id="chart-overlap"></div>
+  </figure>
+  <figure>
+    <h4 class="fig-title">500 Ma에 대양 한가운데 놓인 판 (백만 km²)</h4>
+    <div class="table-wrap"><table id="table-plates"></table></div>
+  </figure>
+</section>
+
+<section id="s6" class="step">
+  <p class="step-no">006 · Macrostrat 북미</p>
+  <h2>북미 해성층 기록도 후기 오르도비스기가 캄브리아기보다 넓다</h2>
+  <div class="learned">
+    <h3>알아낸 것</h3>
+    <ul>
+      <li>Macrostrat 북미 단면 949개에서 해성층이 있는 단면 면적은 450 Ma(9.9백만 km²)에 정점이 있다. 500 Ma는 6.4, 520 Ma는 2.8이다.</li>
+      <li>같은 단면 범위에서 모델의 잠김 면적과의 순위 상관은 고생대 0.81, 전체 0.74다. PBDB 화석과 연결된 단위를 빼도 같다.</li>
+      <li>모델은 고생대 북미의 60–90%를 잠기게 한다. 해성층은 보존된 하한이라 이 차이는 모순이 아니지만, 비해성층만 남은 단면을 모델이 잠기게 한 곳도 있다.</li>
+      <li>Scotese가 해수면을 침수 증거에 맞췄고 같은 문헌을 썼을 수 있어, 이것은 독립 검증이 아니라 일관성 검사다.</li>
+    </ul>
+  </div>
+  <figure>
+    <div class="map-tools">
+      <label>보기 <select id="macro-view"><option value="agree">모델과의 일치</option><option value="record">기록 종류</option></select></label>
+      <button class="btn small" data-spin="map-macro">자동 회전</button>
+      <span class="readout" id="readout-macro"></span>
+    </div>
+    <div class="map" id="map-macro"></div>
+    <div class="map-legend" id="legend-macro"></div>
+    <figcaption>현재 위치의 북미 단면. 바탕은 현재(0 Ma) 지형. 모델 "잠김"은 단면 안 표본점 면적의 절반 넘게가 아틀라스 해수면(없으면 해수면 0) 아래인 경우다.</figcaption>
+  </figure>
+  <figure>
+    <h4 class="fig-title">북미 단면 범위: Macrostrat 해성층 단면 면적과 모델 잠김 (백만 km²)</h4>
+    <div id="chart-macro"></div>
+  </figure>
+</section>
+
+<section id="s7" class="step">
+  <p class="step-no">한계와 다음</p>
+  <h2>아직 답하지 못한 것</h2>
+  <ul class="plain">
+    <li>아틀라스 해수면은 Scotese의 해석이다. 해양저 연령에서 계산한 독립 해수면으로 바꿔야 순환 논리가 끊긴다.</li>
+    <li>그때 없던 지괴를 빼고 세려면 지괴별로 언제 대륙에 붙었는지 자료가 필요하다.</li>
+    <li>북미 밖의 대륙은 아직 확인하지 않았다. 소크 해침은 북미의 사건이라 이 대륙에 유리할 수 있다.</li>
+    <li>대륙지각 면적·두께·부피가 준평형이었다는 가설은 판 겹침(늘어난 연변)과 직접 이어지며, 변형을 되돌리는 단계에서 다룬다.</li>
+  </ul>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p>자료: Scotese &amp; Wright (2018) PALEOMAP PaleoDEM과 판 모델, Scotese (2014) PaleoAtlas — CC BY 4.0, <a href="https://doi.org/10.5281/zenodo.5460860">Zenodo 5460860</a>. Laske et al. (2013) <a href="https://igppweb.ucsd.edu/~gabi/crust1.html">CRUST1.0</a>. <a href="https://macrostrat.org">Macrostrat</a> (Peters et al. 2018) — CC BY 4.0, 2026-11-14에 받음.</p>
+    <p class="muted">지도는 몰바이데 투영이며 좌우로 끌면 중앙 경선이 돈다(EarthThruTime3D의 방식). 면적은 백만 km². <span id="version"></span></p>
+  </div>
+</footer>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>

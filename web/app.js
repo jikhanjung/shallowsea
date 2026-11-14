@@ -262,6 +262,24 @@ function makeCharts() {
     ],
     note: '판 겹침의 계산 방식 오차(실제 겹침이 없는 강체 회전에서 나오는 값)는 약 1백만 km²다.',
   }));
+  charts.push(timeChart($('chart-macro-sa'), {
+    unit: '백만 km²', yMin: 0, onPick: pick,
+    series: [
+      { label: 'Macrostrat 해성층 단면', short: '해성층', color: 'var(--series-1)', values: S('sa_marine') },
+      { label: 'Scotese 지형 + 아틀라스 해수면(최대 판)', short: 'Scotese', color: 'var(--series-2)', values: S('sa_atlas_max'), connect: true },
+      { label: '현대 대륙 모양 + 독립 해수면', short: '현대 모양', color: 'var(--series-3)', values: S('sa_modern') },
+    ],
+    note: '남미 단면 범위(대륙지각 표본점)는 4.4백만 km²다.',
+  }));
+  charts.push(timeChart($('chart-needed-sl'), {
+    unit: 'm', yMin: -200, yMax: 1200, onPick: pick,
+    series: [
+      { label: '북미', short: '북미', color: 'var(--series-1)', values: S('na_needed_sl'), digits: 0 },
+      { label: '남미', short: '남미', color: 'var(--series-2)', values: S('sa_needed_sl'), digits: 0 },
+      { label: '독립 해수면(판구조, 평균)', short: '독립 해수면', color: 'var(--series-3)', dash: true, values: S('tect_avg_m'), digits: 0 },
+    ],
+    note: '단면마다 안에 든 대륙지각의 현대 고도(물·얼음 하중을 뺀 것) 중앙값을 그 단면이 잠기는 해수면으로 보고, 해성 단위가 있는 단면들의 면적 가중 중앙값을 냈다. 단면 일부만 잠겼어도 단면 전체를 세므로 크게 잡혔을 수 있다.',
+  }));
   independentCharts();
   marginChart();
   volumeCharts();
@@ -271,6 +289,7 @@ function makeCharts() {
       { label: '모델 잠김(아틀라스 해수면 최대 판)', short: '모델', color: 'var(--series-2)', values: S('model_na_atlas_max'), connect: true },
       { label: 'Macrostrat 해성층 단면', short: '해성층', color: 'var(--series-1)', values: S('macro_marine') },
       { label: 'PBDB 연결 단위를 뺀 해성층 단면', short: 'PBDB 뺌', color: 'var(--series-1)', dash: true, values: S('macro_marine_nopbdb'), labelDy: 12 },
+      { label: '현대 대륙 모양 + 독립 해수면(012)', short: '현대 모양', color: 'var(--series-3)', values: S('model_na_modern') },
     ],
     note: '모델 범위(단면 안 대륙지각 표본점)는 24.6백만 km²다. 해성층 단면은 퇴적·보존을 거친 하한이다.',
   }));

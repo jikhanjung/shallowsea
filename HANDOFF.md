@@ -27,7 +27,7 @@
 | PaleoDEM 150–200 m 구간의 수심값 빈도와 위도별 면적 | `scripts/depth_audit.py` | `results/depth_audit.txt` |
 | PaleoDEM 1°·0.1° 109장의 값별 면적과 지도별 단일값 | `scripts/depth_classes.py` | `results/depth_classes.csv`, `results/depth_classes_summary.csv` |
 | 회전한 지각과 DEM의 정렬: 깊은 지각, 판 겹침, 중복 제거 면적, 회전 나이 시험 | `scripts/alignment.py` (공용 모듈 `crust_points.py`) | `results/alignment_summary.csv`, `alignment_plates.csv`, `alignment_age_shift.csv` |
-| Macrostrat 북미 해성층 단면 면적과 같은 범위의 모델 잠김 비교 | `scripts/macrostrat_compare.py` | `results/macrostrat_north_america.csv`, `macrostrat_columns_agreement.csv` |
+| Macrostrat 해성층 단면 면적과 같은 범위의 모델 잠김 비교(북미 1, 남미 8). 현대 모양에서 해성 단면을 잠기게 하는 데 필요한 해수면 | `scripts/macrostrat_compare.py [프로젝트]` | `results/macrostrat_north_america.csv`, `macrostrat_columns_agreement.csv`, `macrostrat_south_america*.csv` |
 | 아틀라스 그림과 DEM을 겹쳐 해수면 표와 지도 번호 대응을 확인. 다른 스크립트의 아틀라스 해수면은 이 대응을 따른다 | `scripts/atlas_check.py` | `results/atlas_sea_level_check.csv` |
 | Scotese와 독립적인 해수면(van der Meer et al. 2022)으로 잠긴 대륙지각: Scotese 지형(모델 A)과 현대 대륙 모양 고정(모델 B) | `scripts/independent_sea_level.py` | `results/independent_sea_level.csv` |
 | 회전한 대륙지각의 연변 길이(3° 칸, 강체 회전 기준값 대비)와 대륙붕 폭을 고정했을 때의 대륙붕 면적 | `scripts/margin_length.py` | `results/margin_length.csv` |
@@ -50,7 +50,7 @@ PaleoCoastlines `areas.csv`로 한 면적·부피 수지와 원본 PaleoDEM 전 
 
 **Scotese와 독립적인 해수면을 쓰면 캄브리아기 침수를 지지하는 계산이 없다**([devlog 009](devlog/20261114_009_independent_sea_level.md)). 스트론튬 기반 판구조 해수면은 500 Ma를 −18 m(−65 ~ +17), 450 Ma를 +88 m로 둔다. 현대 대륙 모양을 고정하면 500 Ma의 잠긴 대륙지각은 109개 시점 중 108번째로 작다. Scotese 지형에서 0–200 m 띠는 현대 모양의 상한(28.2백만 km²)을 52개 시점에서 넘는다.
 
-**부피 일정 가설과 Scotese 고생대 지도는 함께 성립하지 않는다**([devlog 011](devlog/20261114_011_crust_volume.md)). 캄브리아기 대륙(그때 없던 지괴·겹침 제외)은 면적 0.82배, 평균 두께 0.92배로 부피가 현재의 약 0.75배다. 연변 길이로 본 대륙붕 면적은 ±20% 안에서 움직이고 캄브리아기가 두드러지지 않는다([devlog 010](devlog/20261114_010_margin_length.md)).
+**등압평형만 가정하면 부피 일정 가설과 Scotese 고생대 지도는 함께 성립하지 않는다**([devlog 011](devlog/20261114_011_crust_volume.md)). 그러나 해성층 기록은 고생대 대륙 안쪽이 현대 모양보다 해수면에 대해 수백 m 낮았다고 말한다(북미 중앙값 +435 m, 남미 +243 m, [devlog 012](devlog/20261114_012_south_america_and_modern_shape.md)). 그 원인이 동적 지형·열침강이면 고도 효과는 부피와 무관하고 면적 부족(약 18%p)만 남는다. "부피 일정"은 버틸 수 있지만 "모양 일정"은 기록과 맞지 않는다. 캄브리아기 대륙(그때 없던 지괴·겹침 제외)은 면적 0.82배, 평균 두께 0.92배로 부피가 현재의 약 0.75배다. 연변 길이로 본 대륙붕 면적은 ±20% 안에서 움직이고 캄브리아기가 두드러지지 않는다([devlog 010](devlog/20261114_010_margin_length.md)).
 
 판 겹침을 빼는 **지도상 중복 제거 면적**도 있다([devlog 005](devlog/20261114_005_alignment_check.md), `alignment_summary.csv`의 `dedup_*`). 아틀라스 해수면 최대 판 기준 500 Ma 90.4, 380 Ma 107.1백만 km²로, 순위는 같다.
 

@@ -32,4 +32,8 @@ download "https://ars.els-cdn.com/content/image/1-s2.0-S1342937X22002192-mmc1.xl
 mkdir -p macrostrat
 download "https://macrostrat.org/api/v2/units?project_id=1&response=long" macrostrat/units_project1.json
 download "https://macrostrat.org/api/v2/columns?project_id=1&response=long&format=geojson_bare" macrostrat/columns_project1.geojson
+download "https://macrostrat.org/api/v2/units?project_id=8&response=long" macrostrat/units_project8.json
+download "https://macrostrat.org/api/v2/columns?project_id=8&response=long&format=geojson_bare" macrostrat/columns_project8.geojson
+download "https://macrostrat.org/api/v2/units?project_id=8&response=long" macrostrat/units_project8.json
+download "https://macrostrat.org/api/v2/columns?project_id=8&response=long&format=geojson_bare" macrostrat/columns_project8.geojson
 unzip -jo plates.zip '*PlateModel.rot' '*PlatePolygons.gpml'

@@ -71,6 +71,7 @@ def main():
         waterline[r['age_ma']].append(r)
     align = {r['age_ma']: r for r in read_csv('alignment_summary.csv')}
     macro = {r['age_ma']: r for r in read_csv('macrostrat_north_america.csv')}
+    macro_sa = {r['age_ma']: r for r in read_csv('macrostrat_south_america.csv')}
     indep = {r['age_ma']: r for r in read_csv('independent_sea_level.csv')}
     margin = {r['age_ma']: r for r in read_csv('margin_length.csv')}
     volume = {r['age_ma']: r for r in read_csv('crust_volume.csv')}
@@ -138,6 +139,11 @@ def main():
             'macro_marine': num(m['macrostrat_marine']), 'macro_marine_nopbdb': num(m['macrostrat_marine_without_pbdb_units']),
             'macro_any': num(m['macrostrat_any_units']), 'model_na_atlas_max': num(m['model_submerged_atlas_max']),
             'model_na_sl0': num(m['model_submerged_sea_level_0']),
+            'model_na_modern': num(m['modern_shape_submerged_tect_avg']),
+            'na_needed_sl': num(m['modern_shape_sea_level_for_half_of_marine_columns_m']),
+            'sa_marine': num(macro_sa[key]['macrostrat_marine']), 'sa_atlas_max': num(macro_sa[key]['model_submerged_atlas_max']),
+            'sa_modern': num(macro_sa[key]['modern_shape_submerged_tect_avg']),
+            'sa_needed_sl': num(macro_sa[key]['modern_shape_sea_level_for_half_of_marine_columns_m']),
             **{k: num(indep[key][k]) for k in ('tect_avg_m', 'tect_min_m', 'tect_max_m', 'tge_avg_m', 'A_tect_avg', 'A_band_tect_avg',
                                                'B_tect_avg', 'B_band_tect_avg', 'B_band_tect_min', 'B_band_tect_max', 'A_band_tge_avg', 'B_band_tge_avg')},
             **{k: num(margin[key][k]) for k in ('margin_ratio', 'margin_without_far_ratio', 'shelf_harris_width', 'shelf_harris_width_without_far')},

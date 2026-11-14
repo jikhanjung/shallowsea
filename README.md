@@ -14,7 +14,7 @@
 - [대륙 연변 길이와 대륙붕 면적](results/margin_length.csv)
 - [Scotese 지형이 담는 대륙지각 부피](results/crust_volume.csv)
 - [회전한 지각과 DEM의 정렬 검사](results/alignment_summary.csv): 깊은 지각, 판 겹침, 중복 제거 면적
-- [Macrostrat 북미 해성층과 모델 잠김 비교](results/macrostrat_north_america.csv)와 [단면 단위 일치표](results/macrostrat_columns_agreement.csv)
+- [Macrostrat 북미 해성층과 모델 잠김 비교](results/macrostrat_north_america.csv)와 [단면 단위 일치표](results/macrostrat_columns_agreement.csv), [남미](results/macrostrat_south_america.csv)
 
 ## 웹 페이지
 
@@ -47,7 +47,8 @@ python scripts/airy_sensitivity.py > results/airy_sensitivity.txt
 python scripts/depth_audit.py > results/depth_audit.txt
 python scripts/depth_classes.py
 python scripts/alignment.py
-python scripts/macrostrat_compare.py
+python scripts/macrostrat_compare.py 1   # 북미
+python scripts/macrostrat_compare.py 8   # 남미
 python scripts/independent_sea_level.py
 python scripts/margin_length.py
 python scripts/crust_volume.py

@@ -1,3 +1,5 @@
 # Macrostrat API에서 2026-11-14에 받은 파일. 자료가 갱신되면 값이 달라진다(devlog 006).
 950be4caceb67a80cd42aa4e6a7bb46804528e65f4169dd9b9ef1bb276bef2ba  inputs/macrostrat/columns_project1.geojson
 40213c80c687a0eb58f79495f4de367d5062a437b44a14354e945c6aa779f5d2  inputs/macrostrat/units_project1.json
+2e42d1411eceadd6f40c811e93b283a0360e20e83827ffcce1b4147ddf532f7c  inputs/macrostrat/units_project8.json
+a12296ea5d20d2c5b71e7822b7c9a3ad1777841d947c33117d0f5c02187a1c45  inputs/macrostrat/columns_project8.geojson

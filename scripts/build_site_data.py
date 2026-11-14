@@ -76,6 +76,7 @@ def main():
     margin = {r['age_ma']: r for r in read_csv('margin_length.csv')}
     by_type = {(r['region'], r['age_ma']): r for r in read_csv('needed_sea_level_by_type.csv')}
     volume = {r['age_ma']: r for r in read_csv('crust_volume.csv')}
+    sens = {r['age_ma']: r for r in read_csv('volume_sensitivity.csv')}
     v0 = volume['0']
     a0 = float(v0['dedup_without_far_area'])
     t0 = float(v0['dedup_without_far_volume']) * 1e9 / (a0 * 1e6)
@@ -154,6 +155,11 @@ def main():
             **{k: num(margin[key][k]) for k in ('margin_ratio', 'margin_without_far_ratio', 'shelf_harris_width', 'shelf_harris_width_without_far')},
             **{k: num(volume[key][k]) for k in ('tracked_volume_ratio', 'dedup_volume_ratio', 'dedup_without_far_volume_ratio', 'dedup_without_far_mean_dry_m')},
             'volume_area_ratio': num(float(volume[key]['dedup_without_far_area']) / a0),
+            **{f'thick_offset_{d}': num(sens[key][f'thickness_ratio_offset_{d}']) for d in (0, 200, 300)},
+            'na_craton_corr_excess': (round(float(by_type[('north_america', key)]['craton_residual_corrected_needed_sea_level_m']) - float(by_type[('north_america', key)]['tect_avg_m']), 1)
+                                      if by_type[('north_america', key)]['craton_residual_corrected_needed_sea_level_m'] else None),
+            'na_shield_excess': (round(float(by_type[('north_america', key)]['craton_shield_needed_sea_level_m']) - float(by_type[('north_america', key)]['tect_avg_m']), 1)
+                                 if by_type[('north_america', key)]['craton_shield_needed_sea_level_m'] else None),
             'volume_thickness_ratio': num(float(volume[key]['dedup_without_far_volume']) * 1e9 / (float(volume[key]['dedup_without_far_area']) * 1e6) / t0),
         })
         print(key, flush=True)

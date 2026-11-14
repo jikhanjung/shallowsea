@@ -12,6 +12,7 @@
 - Dhuime et al. (2012), [A change in the geodynamics of continental growth 3 billion years ago](https://doi.org/10.1126/science.1216066).
 - Scholl & von Huene (2009), [Implications of estimated magmatic additions and recycling losses at the subduction zones of accretionary (non-collisional) and collisional (suturing) orogens](https://doi.org/10.1144/sp318.4).
 - Wise (1974), [Continental margins, freeboard and the volumes of continents and oceans through time](https://doi.org/10.1007/978-3-662-01141-6_4).
+- Stephenson et al. (2024), [Global Residual Topography v1.0.1](https://doi.org/10.5281/zenodo.10633081), CC BY 4.0. 현재 대륙 잔차 지형(지각 등압평형으로 설명되지 않는 높이, devlog 015).
 - Immenhauser (2009), [Estimating palaeo-water depth from the physical rock record](https://www.sciencedirect.com/science/article/abs/pii/S0012825209000865). 퇴적상과 파랑기저면에서 절대 수심을 추정할 때의 한계를 검토한다.
 - Harris et al. (2014), [Geomorphology of the oceans](https://doi.org/10.1016/j.margeo.2014.01.011), Table 5. 현대 대륙붕 지형 분류다.
 - Karlstrom et al. (2020), [Tonto Group 연대 재보정](https://doi.org/10.1130/G46751.1), [후속 Tonto Group 연구](https://www.cambridge.org/core/journals/geological-magazine/article/new-insights-into-cambrian-time-and-the-sauk-transgression-from-the-grand-canyon/D12F409D6F52917F5062A320B28B86BA).

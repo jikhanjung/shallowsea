@@ -54,6 +54,7 @@ python scripts/independent_sea_level.py
 python scripts/margin_length.py
 python scripts/crust_volume.py
 python scripts/crust_volume_by_region.py
+python scripts/volume_sensitivity.py
 ```
 
 커밋된 결과(3e390d2)는 NumPy 2.3.5, pyGPlates 1.0.0, GDAL 3.10.3에서 만들었다. m710q에서 Python 3.13.17, NumPy 2.5.4, pyGPlates 1.0.0, GDAL 3.12.2로 다시 돌려 같은 결과를 얻었다(2026-11-14, [devlog 002](devlog/20261114_002_reproduce_on_m710q.md)). `airy_sensitivity.txt` 첫 줄의 합계 두 개는 마지막 자리가 다르게 나온다. 원자료와 인용은 [docs/references.md](docs/references.md)를 참조한다.

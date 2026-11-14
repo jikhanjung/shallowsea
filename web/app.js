@@ -286,6 +286,7 @@ function makeCharts() {
       { label: '북미 안정지괴 안쪽', short: '북미 안쪽', color: 'var(--series-1)', values: S('na_craton_excess'), digits: 0 },
       { label: '북미 조산대', short: '북미 조산대', color: 'var(--series-2)', values: S('na_orogen_excess'), digits: 0 },
       { label: '남미 안정지괴 안쪽', short: '남미 안쪽', color: 'var(--series-3)', values: S('sa_craton_excess'), digits: 0 },
+      { label: '북미 안쪽, 현재 잔차 지형 보정(015)', short: '북미 안쪽 보정', color: 'var(--series-1)', dash: true, values: S('na_craton_corr_excess'), digits: 0 },
     ],
     note: '0보다 크면 현대 모양과 독립 해수면으로는 그 단면들의 해성층을 담지 못한다. 단면 유형은 단면 안 CRUST1.0 표본점 면적이 가장 큰 현대 지각 유형이다.',
   }));
@@ -348,6 +349,15 @@ function volumeCharts() {
       { label: '겹침과 그때 없던 지괴 제거', short: '지괴도 제거', color: 'var(--series-2)', values: S('dedup_without_far_volume_ratio'), digits: 3 },
     ],
     note: '두께는 PaleoDEM 고도에서 바닷물 하중을 빼고 현대 CRUST1.0의 고도별 평균 두께로 바꿨다. 고생대 대륙의 열 상태가 달랐다면 같은 고도에 다른 두께가 대응한다.',
+  }));
+  charts.push(timeChart($('chart-volume-sens'), {
+    unit: '현재 = 1', yMin: 0.85, yMax: 1.1, onPick: pick,
+    series: [
+      { label: 'Δ = 0 m', short: 'Δ 0', color: 'var(--series-2)', values: S('thick_offset_0'), digits: 3 },
+      { label: 'Δ = 200 m', short: 'Δ 200', color: 'var(--series-1)', values: S('thick_offset_200'), digits: 3 },
+      { label: 'Δ = 300 m', short: 'Δ 300', color: 'var(--series-3)', values: S('thick_offset_300'), digits: 3 },
+    ],
+    note: 'Scotese 고도를 "등압평형 고도 − Δ"로 보고 두께로 바꾼 평균 두께 / 현재(그때 없던 지괴·겹침 제외). Δ는 동적 지형 등으로 눌린 높이다.',
   }));
   charts.push(timeChart($('chart-volume-parts'), {
     unit: '현재 = 1', yMin: 0.6, yMax: 1.1, onPick: pick,

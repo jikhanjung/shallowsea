@@ -27,6 +27,9 @@ download "$zenodo/PALEOMAP_PaleoAtlases.zip/content" paleoatlases.zip
 mkdir -p literature
 download "https://eprints.whiterose.ac.uk/id/eprint/189833/7/1-s2.0-S1342937X22002192-main.pdf" literature/vandermeer2022.pdf
 download "https://ars.els-cdn.com/content/image/1-s2.0-S1342937X22002192-mmc1.xlsx" literature/vandermeer2022_mmc1.xlsx
+# 현재 대륙 잔차 지형(Stephenson et al. 2024, CC BY 4.0, devlog 015).
+mkdir -p residual
+download "https://zenodo.org/api/records/10633081/files/sstephenson2/global-residual-topography-v1.0.1.zip/content" residual/global-residual-topography-v1.0.1.zip
 # Macrostrat 북미(project 1) 단위와 단면 (devlog 006). 계속 갱신되는 자료라 받은 날짜의 체크섬은
 # docs/macrostrat-sha256.txt에 따로 둔다. 다시 받으면 값이 달라질 수 있다.
 mkdir -p macrostrat

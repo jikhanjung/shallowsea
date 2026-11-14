@@ -24,6 +24,7 @@
 | 고도 분포 두 개(현대 지형, Airy)에 균일한 상대 해수면 변화를 주는 민감도 실험. 육지 면적 목표는 물가 기준 CSV에서 읽는다 | `scripts/airy_sensitivity.py` | `results/airy_sensitivity.txt` |
 | PaleoDEM 150–200 m 구간의 수심값 빈도와 위도별 면적 | `scripts/depth_audit.py` | `results/depth_audit.txt` |
 | PaleoDEM 1°·0.1° 109장의 값별 면적과 지도별 단일값 | `scripts/depth_classes.py` | `results/depth_classes.csv`, `results/depth_classes_summary.csv` |
+| 회전한 지각과 DEM의 정렬: 깊은 지각, 판 겹침, 중복 제거 면적, 회전 나이 시험 | `scripts/alignment.py` (공용 모듈 `crust_points.py`) | `results/alignment_summary.csv`, `alignment_plates.csv`, `alignment_age_shift.csv` |
 
 PaleoCoastlines `areas.csv`로 한 면적·부피 수지와 원본 PaleoDEM 전 지구 수심 면적은 스크립트 없이 devlog 001에 수치만 남아 있다.
 
@@ -35,6 +36,8 @@ PaleoCoastlines `areas.csv`로 한 면적·부피 수지와 원본 PaleoDEM 전 
 
 이 정의에서 캄브리아기(500 Ma 99.1, 520 Ma 104.9백만 km²)는 가장 많지 않다. 데본기·실루리아기·오르도비스기(380 Ma 114.8, 425 Ma 114.0, 480 Ma 111.7)가 더 크다. 다만 아틀라스 해수면은 지도마다 다른 계통역(최대 범람면, 초층서 경계 등)을 그린 Scotese의 해석이라, 시점끼리 비교하면 고해수면 지도와 저해수면 지도가 섞인다.
 
+판 겹침을 빼는 **지도상 중복 제거 면적**도 있다([devlog 005](devlog/20261114_005_alignment_check.md), `alignment_summary.csv`의 `dedup_*`). 아틀라스 해수면 최대 판 기준 500 Ma 90.4, 380 Ma 107.1백만 km²로, 순위는 같다.
+
 ## 함정
 
 - **PaleoDEM의 해수면 부근 값은 측정된 수심이 아니다**([devlog 003](devlog/20261114_003_paleodem_depth_classes.md)). 모든 값이 40 m 간격(256단계 그레이스케일)이다. 80–160 Ma와 250–540 Ma 지도는 대륙내해로 보이는 넓은 지역을 한 값으로 칠했고, 그 값이 지도마다 다르다: 대부분 −160 m, 250 Ma −40 m, 255 Ma −80 m, 230·235·245 Ma 0 m, 180·200·240 Ma +40 m. 500 Ma 0–200 m 58.7백만 km² 가운데 46.4가 −160 m 단일값이다. 그래서 해수면 0에서 150 m, 200 m 경계로 자른 비교(devlog 001의 "현대의 약 3배, 150 m 기준 역전", "88%가 150–200 m", Airy 실험의 150–200 m 표)는 칠한 값의 선택을 비교한 것이다.
@@ -42,9 +45,12 @@ PaleoCoastlines `areas.csv`로 한 면적·부피 수지와 원본 PaleoDEM 전 
 - **Scotese의 PaleoAtlas 지도는 지도마다 다른 해수면(−120 ~ +160 m)으로 그려졌다**(`docs/paleoatlas_sea_levels.csv`). 해수면 0으로 센 면적은 Scotese가 그린 해안선과 다를 수 있다(245 Ma: 6.1 대 35.8).
 - **1°는 0.1°의 점 표본이다.** 1° 결과와 0.1° 결과의 차이는 표본 오차이고 독립 증거가 아니다. EarthByte와 Zenodo의 1° zip은 같은 파일이다.
 - **면적의 기준을 섞지 않는다.** PaleoDEM 원본 면적, Kocsis–Scotese −1,400 m 경계 집계, CRUST1.0 지각 추적 면적(판이 겹치면 중복 합산), 지도상 중복 제거 면적은 서로 다른 값이다.
-- **역회전은 복원이 아니다.** 현대 지각의 면적·두께를 그대로 옮긴 것이고 과거 지각 두께가 아니다.
+- **역회전은 복원이 아니다.** 현대 지각의 면적·두께를 그대로 옮긴 것이고 과거 지각 두께가 아니다. 그 결과가 두 가지로 드러난다(devlog 005).
+  - **그때 없던 지각까지 센다.** 500 Ma에 해수면 0에서 1,400 m보다 깊은 곳에 놓인 대륙지각 31.3백만 km² 가운데 19.8이 얕은 곳에서 3° 넘게 떨어진 대양에 있다. 대부분 서시베리아·카자흐스탄, 몽골–아무르, 투란, 오호츠크, 북미 코딜레라, 서남극처럼 나중에 붙은 지괴다.
+  - **판이 겹친다.** 늘어난 대륙연변을 강체로 되돌려 150 Ma 이후 약 15백만 km²가 두 번 세어진다(남미–아프리카, 호주–남극 등). 추적 면적은 지도상 면적이 아니다.
+- **회전 파일은 PaleoDEM과 같은 판 모델이다.** 회전 나이를 ±5, ±10 Myr 비틀면 맞음 지표가 대부분 원래 나이에서 가장 좋다(devlog 005).
 - **순환 검증을 피한다.** Kocsis–Scotese 해안선은 해양화석 위치로 보정됐다. 시점별 Scotese 육지 면적에 맞춘 해수면은 독립적인 고해수면 추정이 아니다.
 
 ## 다음
 
-순서는 [devlog P01](devlog/20261114_P01_validation_plan.md)의 계획을 따른다. 1단계는 정의를 정하고 다시 계산하는 데까지 끝났다(devlog 004). 아틀라스 그림과 격자를 직접 겹쳐 보는 검사가 남았다. 그 다음은 회전 모델과 DEM의 정렬 검사 → 독립 침수·수심 자료 → 독립 해수면과 지역 침강 → 면적·부피와 변형. 항목별 할 일은 [TODOs.md](TODOs.md)에 있다.
+순서는 [devlog P01](devlog/20261114_P01_validation_plan.md)의 계획을 따른다. 1단계(정의, devlog 004)와 2단계(정렬 검사, devlog 005)를 했다. 1단계의 아틀라스 그림 겹치기, 2단계의 지도 그리기가 남았다. 그 다음은 독립 침수·수심 자료 → 독립 해수면과 지역 침강 → 면적·부피와 변형. 항목별 할 일은 [TODOs.md](TODOs.md)에 있다.

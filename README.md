@@ -9,6 +9,7 @@
 - [PaleoDEM 원본의 수심 빈도 검사](results/depth_audit.txt)
 - [PaleoDEM 1°·0.1° 값별 면적](results/depth_classes.csv)과 [지도별 요약](results/depth_classes_summary.csv)
 - [PaleoAtlas 지도별 해수면 설정](docs/paleoatlas_sea_levels.csv)
+- [회전한 지각과 DEM의 정렬 검사](results/alignment_summary.csv): 깊은 지각, 판 겹침, 중복 제거 면적
 
 ## 재현
 
@@ -24,6 +25,7 @@ python scripts/reconstruct.py
 python scripts/airy_sensitivity.py > results/airy_sensitivity.txt
 python scripts/depth_audit.py > results/depth_audit.txt
 python scripts/depth_classes.py
+python scripts/alignment.py
 ```
 
 커밋된 결과(3e390d2)는 NumPy 2.3.5, pyGPlates 1.0.0, GDAL 3.10.3에서 만들었다. m710q에서 Python 3.13.17, NumPy 2.5.4, pyGPlates 1.0.0, GDAL 3.12.2로 다시 돌려 같은 결과를 얻었다(2026-11-14, [devlog 002](devlog/20261114_002_reproduce_on_m710q.md)). `airy_sensitivity.txt` 첫 줄의 합계 두 개는 마지막 자리가 다르게 나온다. 원자료와 인용은 [docs/references.md](docs/references.md)를 참조한다.

@@ -1,3 +1,4 @@
+import csv
 from pathlib import Path
 import tarfile
 import zipfile
@@ -29,6 +30,9 @@ dry_ref = (bounds[:,2]+(layers[:,:2]*density[:,:2]).sum(axis=1)/rho_m)*1000
 target = area[dry_ref<0].sum()
 order = np.argsort(buoyancy)
 offset = buoyancy[order][np.searchsorted(np.cumsum(area[order]),target)]
+with open(ROOT/'results/PALEOMAP_CRUST1_waterline_0-540Ma.csv') as f:
+    targets=[{'age':r['age_ma'],'waterline':r['waterline'],'level':int(r['sea_level_m']),'land':float(r['land_million_km2'])}
+             for r in csv.DictReader(f) if r['age_ma'] in ('500','260','245','240','210')]
 models = {'modern_relief': dry_ref,'airy_only':buoyancy-offset}
 print('area',area.sum(),'rockvol',np.dot(area,rock_thickness)/1000,'published_vol',np.dot(area,published_thickness)/1000,'offset',offset,'ice',np.dot(area,layers[:,1])/1000)
 for name,z in models.items():
@@ -45,8 +49,12 @@ for name,z in models.items():
         val=a[np.searchsorted(x,x,side='right')]-a[start]
         j=np.argmax(val)
         print('max width',d,round(val[j],3),'shift window upper edge',round(x[j],3))
-    for exposed in [89.932,175.244,129.057,161.348]:
+    # 육지 면적 목표는 CRUST1.0 추적표에서 물가 기준별로 읽는다(devlog 004). 모델 해수면은 그 면적을 맞추는 균일한
+    # 상대 해수면 변화이고, 아틀라스 해수면과 비교할 뿐 독립 추정이 아니다.
+    for target in targets:
+        exposed=target['land']
         ix=np.searchsorted(a,area.sum()-exposed)
         s=x[ix-1]+.00001
         d=(s-z)/k
-        print('land target',exposed,'shift',round(s,2),'0-200',round(area[(d>0)&(d<=200)].sum(),2),'150-200',round(area[(d>150)&(d<=200)].sum(),2))
+        print('land target',target['age'],target['waterline'],target['level'],round(exposed,3),'shift',round(s,2),
+              'shift minus waterline',round(s-target['level'],2),'0-200',round(area[(d>0)&(d<=200)].sum(),2))

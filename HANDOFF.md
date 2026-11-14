@@ -20,14 +20,20 @@
 
 | 계산 | 스크립트 | 결과 |
 |---|---|---|
-| CRUST1.0 대륙지각을 PALEOMAP v3로 109개 시점(0–540 Ma)에 역회전해 PaleoDEM 수심대별 면적·부피 집계 | `scripts/reconstruct.py` | `results/PALEOMAP_CRUST1_0-540Ma.csv` |
-| 고도 분포 두 개(현대 지형, Airy)에 균일한 상대 해수면 변화를 주는 민감도 실험 | `scripts/airy_sensitivity.py` | `results/airy_sensitivity.txt` |
+| CRUST1.0 대륙지각을 PALEOMAP v3로 109개 시점(0–540 Ma)에 역회전해 물가(해수면 0, 아틀라스 해수면) 아래로 잠긴 면적·부피 집계. 옛 수심대별 집계도 같이 쓴다 | `scripts/reconstruct.py` | `results/PALEOMAP_CRUST1_waterline_0-540Ma.csv`, `results/PALEOMAP_CRUST1_0-540Ma.csv` |
+| 고도 분포 두 개(현대 지형, Airy)에 균일한 상대 해수면 변화를 주는 민감도 실험. 육지 면적 목표는 물가 기준 CSV에서 읽는다 | `scripts/airy_sensitivity.py` | `results/airy_sensitivity.txt` |
 | PaleoDEM 150–200 m 구간의 수심값 빈도와 위도별 면적 | `scripts/depth_audit.py` | `results/depth_audit.txt` |
 | PaleoDEM 1°·0.1° 109장의 값별 면적과 지도별 단일값 | `scripts/depth_classes.py` | `results/depth_classes.csv`, `results/depth_classes_summary.csv` |
 
 PaleoCoastlines `areas.csv`로 한 면적·부피 수지와 원본 PaleoDEM 전 지구 수심 면적은 스크립트 없이 devlog 001에 수치만 남아 있다.
 
 **m710q에서 재현된다**(2026-11-14, [devlog 002](devlog/20261114_002_reproduce_on_m710q.md)). Python 3.13.17, NumPy 2.5.4, pyGPlates 1.0.0, GDAL 3.12.2로 세 스크립트를 다시 돌렸다. CSV와 `depth_audit.txt`는 바이트 단위로 같고, `airy_sensitivity.txt`는 첫 줄의 두 합계만 마지막 자리(약 1e-16)가 다르다. 절차는 [README.md](README.md)에 있다.
+
+## 지금 쓰는 정의
+
+**얕은 바다를 수심으로 나누지 않고, 물가 아래로 잠긴 CRUST1.0 대륙지각의 면적·부피를 센다**([devlog 004](devlog/20261114_004_waterline_definition.md), 2026-11-14 사용자와 정함). 물가는 PaleoAtlas 지도에 적힌 해수면이 기본이고(판이 여럿이면 범위), 해수면 0은 민감도다. 보간 지도 23개는 아틀라스 해수면이 없어 해수면 0 결과만 있다.
+
+이 정의에서 캄브리아기(500 Ma 99.1, 520 Ma 104.9백만 km²)는 가장 많지 않다. 데본기·실루리아기·오르도비스기(380 Ma 114.8, 425 Ma 114.0, 480 Ma 111.7)가 더 크다. 다만 아틀라스 해수면은 지도마다 다른 계통역(최대 범람면, 초층서 경계 등)을 그린 Scotese의 해석이라, 시점끼리 비교하면 고해수면 지도와 저해수면 지도가 섞인다.
 
 ## 함정
 
@@ -38,8 +44,7 @@ PaleoCoastlines `areas.csv`로 한 면적·부피 수지와 원본 PaleoDEM 전 
 - **면적의 기준을 섞지 않는다.** PaleoDEM 원본 면적, Kocsis–Scotese −1,400 m 경계 집계, CRUST1.0 지각 추적 면적(판이 겹치면 중복 합산), 지도상 중복 제거 면적은 서로 다른 값이다.
 - **역회전은 복원이 아니다.** 현대 지각의 면적·두께를 그대로 옮긴 것이고 과거 지각 두께가 아니다.
 - **순환 검증을 피한다.** Kocsis–Scotese 해안선은 해양화석 위치로 보정됐다. 시점별 Scotese 육지 면적에 맞춘 해수면은 독립적인 고해수면 추정이 아니다.
-- `airy_sensitivity.py`의 육지 면적 목표값 `[89.932, 175.244, 129.057, 161.348]`은 코드에 직접 들어 있다. 앞의 셋은 CSV의 500, 240, 260 Ma 육지 면적이고 넷째의 출처는 기록되어 있지 않다.
 
 ## 다음
 
-순서는 [devlog P01](devlog/20261114_P01_validation_plan.md)의 계획을 따른다. 1단계의 집계는 끝났고 **얕은 바다의 정의를 정하는 일이 남았다**(devlog 003 끝의 세 후보). 그 다음은 회전 모델과 DEM의 정렬 검사 → 독립 침수·수심 자료 → 독립 해수면과 지역 침강 → 면적·부피와 변형. 항목별 할 일은 [TODOs.md](TODOs.md)에 있다.
+순서는 [devlog P01](devlog/20261114_P01_validation_plan.md)의 계획을 따른다. 1단계는 정의를 정하고 다시 계산하는 데까지 끝났다(devlog 004). 아틀라스 그림과 격자를 직접 겹쳐 보는 검사가 남았다. 그 다음은 회전 모델과 DEM의 정렬 검사 → 독립 침수·수심 자료 → 독립 해수면과 지역 침강 → 면적·부피와 변형. 항목별 할 일은 [TODOs.md](TODOs.md)에 있다.

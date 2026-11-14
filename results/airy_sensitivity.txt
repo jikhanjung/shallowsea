@@ -1,4 +1,4 @@
-area 189.0818141994575 rockvol 6.86203109339714 published_vol 6.8907461060098445 offset 4773.51515151515 ice 0.028715012612705672
+area 189.0818141994575 rockvol 6.86203109339714 published_vol 6.890746106009844 offset 4773.51515151515 ice 0.02871501261270568
 modern_relief relative shift, wet, 0-150, 0-200, 150-200
 -200 23.485 4.673 6.109 1.436
 -100 29.399 6.312 7.987 1.675
@@ -14,10 +14,16 @@ modern_relief relative shift, wet, 0-150, 0-200, 150-200
 max width 50 9.188 shift window upper edge 13.333
 max width 150 22.065 shift window upper edge 173.03
 max width 200 28.18 shift window upper edge 100.061
-land target 89.932 shift 290.0 0-200 23.88 150-200 5.67
-land target 175.244 shift -442.18 0-200 3.32 150-200 0.75
-land target 129.057 shift 70.0 0-200 27.33 150-200 5.96
-land target 161.348 shift -124.36 0-200 7.54 150-200 1.66
+land target 500 sea_level_0 0 89.932 shift 290.0 shift minus waterline 290.0 0-200 23.88
+land target 500 atlas 40 87.975 shift 300.0 shift minus waterline 260.0 0-200 23.62
+land target 260 sea_level_0 0 129.057 shift 70.0 shift minus waterline 70.0 0-200 27.33
+land target 260 atlas -80 136.683 shift 30.0 shift minus waterline 110.0 0-200 24.08
+land target 245 sea_level_0 0 153.36 shift -48.36 shift minus waterline -48.36 0-200 11.91
+land target 245 atlas 40 147.705 shift -20.73 shift minus waterline -60.73 0-200 16.94
+land target 240 sea_level_0 0 175.244 shift -442.18 shift minus waterline -442.18 0-200 3.32
+land target 240 atlas 0 175.244 shift -442.18 shift minus waterline -442.18 0-200 3.32
+land target 210 sea_level_0 0 161.348 shift -124.36 shift minus waterline -124.36 0-200 7.54
+land target 210 atlas 40 154.497 shift -55.27 shift minus waterline -95.27 0-200 11.07
 airy_only relative shift, wet, 0-150, 0-200, 150-200
 -200 38.401 3.144 4.297 1.153
 -100 42.102 3.792 4.98 1.187
@@ -33,7 +39,13 @@ airy_only relative shift, wet, 0-150, 0-200, 150-200
 max width 50 4.324 shift window upper edge 1160.152
 max width 150 9.962 shift window upper edge 1209.121
 max width 200 12.62 shift window upper edge 1220.697
-land target 89.932 shift 812.7 0-200 10.42 150-200 2.16
-land target 175.244 shift -1348.82 0-200 1.83 150-200 0.46
-land target 129.057 shift 281.91 0-200 7.0 150-200 1.52
-land target 161.348 shift -543.88 0-200 3.74 150-200 0.66
+land target 500 sea_level_0 0 89.932 shift 812.7 shift minus waterline 812.7 0-200 10.42
+land target 500 atlas 40 87.975 shift 838.76 shift minus waterline 798.76 0-200 10.73
+land target 260 sea_level_0 0 129.057 shift 281.91 shift minus waterline 281.91 0-200 7.0
+land target 260 atlas -80 136.683 shift 133.27 shift minus waterline 213.27 0-200 6.15
+land target 245 sea_level_0 0 153.36 shift -288.21 shift minus waterline -288.21 0-200 4.47
+land target 245 atlas 40 147.705 shift -121.7 shift minus waterline -161.7 0-200 4.79
+land target 240 sea_level_0 0 175.244 shift -1348.82 shift minus waterline -1348.82 0-200 1.83
+land target 240 atlas 0 175.244 shift -1348.82 shift minus waterline -1348.82 0-200 1.83
+land target 210 sea_level_0 0 161.348 shift -543.88 shift minus waterline -543.88 0-200 3.74
+land target 210 atlas 40 154.497 shift -323.12 shift minus waterline -363.12 0-200 4.43

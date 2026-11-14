@@ -23,7 +23,7 @@
 | `scripts/` | 내려받기(`download.sh`)와 계산 스크립트 |
 | `inputs/` | 내려받은 원자료. git에 올리지 않는다(`.gitignore`). 체크섬은 `docs/input-sha256.txt` |
 | `results/` | 스크립트가 만든 결과. 커밋한다 |
-| `docs/` | 입력 체크섬, 문헌 목록, 손으로 옮긴 자료(`paleoatlas_sea_levels.csv`) |
+| `docs/` | 연구의 근거(`rationale.md`), 입력 체크섬, 문헌 목록, 손으로 옮긴 자료(`paleoatlas_sea_levels.csv`) |
 | `devlog/` | 그때의 판단과 근거 |
 | `web/` | 정적 웹 페이지. `web/data/`는 `scripts/build_site_data.py`로 만들고 git에 올리지 않는다 |
 | `deploy/` | Docker 이미지와 dolfinid 배포(`deploy.sh`, `host/`) |

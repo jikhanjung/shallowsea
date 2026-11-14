@@ -16,7 +16,7 @@
 
 특히 대륙내해는 허드슨만처럼 대륙 안쪽을 침수하며, 현대 해저지형에서 측정한 대륙붕단까지의 면적과도 정의가 다르다. Harris et al. (2014)의 현대 대륙붕 면적은 3,224만 km²다.
 
-사용자의 가설은 현생누대에 대륙지각의 면적과 평균 두께 및 부피가 준평형에 가까웠을 수 있다는 것이다. 지각의 생성·소실과 판 변형에 따른 변화는 허용한다. 이 가설은 대륙 범위를 임의의 수심 경계로 정의해 얻은 면적의 물리적 타당성을 검사하는 데 쓸 수 있다. 면적과 부피를 맞춰도 얕은 수심대에 들어가는 면적은 해수면 부근의 고도–면적 분포, 분지 침강과 상대 해수면에 달려 있다.
+사용자의 가설은 현생누대에 대륙지각의 면적과 평균 두께 및 부피가 준평형에 가까웠을 수 있다는 것이다. 사용자의 말과 그 검증은 [docs/rationale.md](docs/rationale.md)에 있다: 부피 일정은 문헌상 합리적이고, "물가 아래 0–200 m 띠 면적이 크게 변하지 않는다"는 약한 형태도 현대 대륙 모양에서는 버틴다(17–28백만 km²). "잠긴 대륙 면적이 일정하다"는 강한 형태는 해수면 변화 때문에 성립하지 않는다. 지각의 생성·소실과 판 변형에 따른 변화는 허용한다. 이 가설은 대륙 범위를 임의의 수심 경계로 정의해 얻은 면적의 물리적 타당성을 검사하는 데 쓸 수 있다. 면적과 부피를 맞춰도 얕은 수심대에 들어가는 면적은 해수면 부근의 고도–면적 분포, 분지 침강과 상대 해수면에 달려 있다.
 
 ## 지금 되어 있는 것
 
@@ -29,6 +29,7 @@
 | 회전한 지각과 DEM의 정렬: 깊은 지각, 판 겹침, 중복 제거 면적, 회전 나이 시험 | `scripts/alignment.py` (공용 모듈 `crust_points.py`) | `results/alignment_summary.csv`, `alignment_plates.csv`, `alignment_age_shift.csv` |
 | Macrostrat 북미 해성층 단면 면적과 같은 범위의 모델 잠김 비교 | `scripts/macrostrat_compare.py` | `results/macrostrat_north_america.csv`, `macrostrat_columns_agreement.csv` |
 | 아틀라스 그림과 DEM을 겹쳐 해수면 표와 지도 번호 대응을 확인. 다른 스크립트의 아틀라스 해수면은 이 대응을 따른다 | `scripts/atlas_check.py` | `results/atlas_sea_level_check.csv` |
+| Scotese와 독립적인 해수면(van der Meer et al. 2022)으로 잠긴 대륙지각: Scotese 지형(모델 A)과 현대 대륙 모양 고정(모델 B) | `scripts/independent_sea_level.py` | `results/independent_sea_level.csv` |
 | 단계별 결과 웹 페이지 자료 | `scripts/build_site_data.py` | `web/data/`(git 제외), 페이지는 `web/`, 이미지는 `deploy/` |
 
 PaleoCoastlines `areas.csv`로 한 면적·부피 수지와 원본 PaleoDEM 전 지구 수심 면적은 스크립트 없이 devlog 001에 수치만 남아 있다.
@@ -44,6 +45,8 @@ PaleoCoastlines `areas.csv`로 한 면적·부피 수지와 원본 PaleoDEM 전 
 이 정의에서 캄브리아기(500 Ma 99.1–101.0, 520 Ma 104.9–108.8백만 km²)는 가장 많지 않다. 데본기·실루리아기·오르도비스기(380 Ma 114.8–118.4, 425 Ma 114.0–117.3, 480 Ma 111.7–117.0)가 더 크다. 다만 아틀라스 해수면은 지도마다 다른 계통역(최대 범람면, 초층서 경계 등)을 그린 Scotese의 해석이라, 시점끼리 비교하면 고해수면 지도와 저해수면 지도가 섞인다.
 
 **북미에서는 Macrostrat 해성층 기록도 같은 방향이다**([devlog 006](devlog/20261114_006_macrostrat_north_america.md)). 해성층 단면 면적은 450 Ma(9.9백만 km²)에 정점이 있고 500 Ma는 6.4, 520 Ma는 2.8이다. 모델과의 순위 상관은 고생대 0.81이다. 다만 Scotese가 해수면을 침수 증거에 맞췄고 같은 문헌을 썼을 수 있어 독립 검증이 아니라 일관성 검사다. 모델은 고생대 북미의 60–90%를 잠기게 하는데, 해성층 단면은 그 절반 이하이고 비해성층만 있는 단면도 상당수 잠긴다.
+
+**Scotese와 독립적인 해수면을 쓰면 캄브리아기 침수를 지지하는 계산이 없다**([devlog 009](devlog/20261114_009_independent_sea_level.md)). 스트론튬 기반 판구조 해수면은 500 Ma를 −18 m(−65 ~ +17), 450 Ma를 +88 m로 둔다. 현대 대륙 모양을 고정하면 500 Ma의 잠긴 대륙지각은 109개 시점 중 108번째로 작다. Scotese 지형에서 0–200 m 띠는 현대 모양의 상한(28.2백만 km²)을 52개 시점에서 넘는다.
 
 판 겹침을 빼는 **지도상 중복 제거 면적**도 있다([devlog 005](devlog/20261114_005_alignment_check.md), `alignment_summary.csv`의 `dedup_*`). 아틀라스 해수면 최대 판 기준 500 Ma 90.4, 380 Ma 107.1백만 km²로, 순위는 같다.
 

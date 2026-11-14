@@ -12,4 +12,5 @@
 | 006 | 2026-11-14 | [Macrostrat 북미 해성층 기록과 모델 잠김의 비교](20261114_006_macrostrat_north_america.md) |
 | 007 | 2026-11-14 | [단계별 결과를 보여 주는 웹 페이지와 dolfinid 배포](20261114_007_web_visualization.md) |
 | 008 | 2026-11-14 | [아틀라스 그림으로 해수면 표와 지도 번호 대응을 확인한다](20261114_008_atlas_sea_level_check.md) |
+| 009 | 2026-11-14 | [Scotese와 독립적인 해수면으로 다시 센다](20261114_009_independent_sea_level.md) |
 | P01 | 2026-11-14 | [다음 검증의 순서: 수심 등급부터 독립 해수면까지](20261114_P01_validation_plan.md) |

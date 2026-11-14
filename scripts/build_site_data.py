@@ -71,6 +71,7 @@ def main():
         waterline[r['age_ma']].append(r)
     align = {r['age_ma']: r for r in read_csv('alignment_summary.csv')}
     macro = {r['age_ma']: r for r in read_csv('macrostrat_north_america.csv')}
+    indep = {r['age_ma']: r for r in read_csv('independent_sea_level.csv')}
 
     units, columns = load_macrostrat()
     col_ids = [f['properties']['col_id'] for f in columns]
@@ -132,6 +133,8 @@ def main():
             'macro_marine': num(m['macrostrat_marine']), 'macro_marine_nopbdb': num(m['macrostrat_marine_without_pbdb_units']),
             'macro_any': num(m['macrostrat_any_units']), 'model_na_atlas_max': num(m['model_submerged_atlas_max']),
             'model_na_sl0': num(m['model_submerged_sea_level_0']),
+            **{k: num(indep[key][k]) for k in ('tect_avg_m', 'tect_min_m', 'tect_max_m', 'tge_avg_m', 'A_tect_avg', 'A_band_tect_avg',
+                                               'B_tect_avg', 'B_band_tect_avg', 'B_band_tect_min', 'B_band_tect_max', 'A_band_tge_avg', 'B_band_tge_avg')},
         })
         print(key, flush=True)
     np.stack(crust_0).tofile(OUT / 'crust_sea_level_0.bin')

@@ -6,6 +6,12 @@
 - Marcilly et al. (2022), [Global Phanerozoic sea levels from paleogeographic flooding maps](https://doi.org/10.1016/j.gr.2022.05.011), 특히 §3.1.2. −1,400 m 등심선과 지구물리 지각 경계의 차이를 검토했다. 360 Ma에 모델 간 침수 면적 차이가 약 3천만 km²에 달했다.
 - King & Welford (2022), [Deformable Continental Blocks and Crustal Thicknesses](https://doi.org/10.1029/2022GC010372). 남부 북대서양의 지역 복원 사례다.
 - Peters, Husson & Czaplewski (2018), [Macrostrat: a platform for geological data integration and deep-time Earth crust research](https://doi.org/10.1029/2018GC007467). [API](https://macrostrat.org/api/v2), CC BY 4.0. 북미(project 1) 단위와 단면을 2026-11-14에 받았다.
+- van der Meer et al. (2022), [Long-term Phanerozoic global mean sea level: Insights from strontium isotope variations and estimates of continental glaciation](https://doi.org/10.1016/j.gr.2022.07.014), Gondwana Research 111:103–121, CC BY 4.0. 부록 1의 해수면 곡선을 쓴다(devlog 009).
+- Young et al. (2022), [Long-term Phanerozoic sea level change from solid Earth processes](https://doi.org/10.1016/j.epsl.2022.117451), EPSL 584. 수치 자료는 공개되어 있지 않다.
+- Armstrong (1981), [Radiogenic isotopes: the case for crustal recycling on a near-steady-state no-continental-growth Earth](https://doi.org/10.1098/rsta.1981.0122). 대륙지각 부피 정상 상태 주장(docs/rationale.md).
+- Dhuime et al. (2012), [A change in the geodynamics of continental growth 3 billion years ago](https://doi.org/10.1126/science.1216066).
+- Scholl & von Huene (2009), [Implications of estimated magmatic additions and recycling losses at the subduction zones of accretionary (non-collisional) and collisional (suturing) orogens](https://doi.org/10.1144/sp318.4).
+- Wise (1974), [Continental margins, freeboard and the volumes of continents and oceans through time](https://doi.org/10.1007/978-3-662-01141-6_4).
 - Immenhauser (2009), [Estimating palaeo-water depth from the physical rock record](https://www.sciencedirect.com/science/article/abs/pii/S0012825209000865). 퇴적상과 파랑기저면에서 절대 수심을 추정할 때의 한계를 검토한다.
 - Harris et al. (2014), [Geomorphology of the oceans](https://doi.org/10.1016/j.margeo.2014.01.011), Table 5. 현대 대륙붕 지형 분류다.
 - Karlstrom et al. (2020), [Tonto Group 연대 재보정](https://doi.org/10.1130/G46751.1), [후속 Tonto Group 연구](https://www.cambridge.org/core/journals/geological-magazine/article/new-insights-into-cambrian-time-and-the-sauk-transgression-from-the-grand-canyon/D12F409D6F52917F5062A320B28B86BA).

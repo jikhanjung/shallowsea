@@ -9,31 +9,57 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="hero">
-  <div class="wrap">
-    <p class="eyebrow">shallowsea · 연구 기록</p>
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <span class="brand">shallowsea</span>
     <h1>캄브리아기에 얕은 바다가 <span class="nowrap">유난히 많았나?</span></h1>
-    <p class="lede">Scotese의 PALEOMAP 고지형(PaleoDEM)과 판 모델, 현대 지각 모델 CRUST1.0, 북미 층서 자료 Macrostrat으로 같은 질문을 단계별로 다시 계산했다. 단계마다 무엇을 알아냈는지와 그 근거를 보인다.</p>
+  </div>
+</header>
+
+<div class="sticky">
+  <nav class="tabs" aria-label="검증 단계">
+    <div class="wrap"><div class="tabs-inner" role="tablist" id="tabs"></div></div>
+  </nav>
+  <nav class="agebar" id="agebar" aria-label="시점">
+    <div class="wrap agebar-inner">
+      <button id="play" class="btn" aria-label="시점 자동 재생">▶</button>
+      <input id="age" type="range" min="0" max="108" step="1" aria-label="시점 고르기">
+      <output id="age-label" class="age-label"></output>
+    </div>
+  </nav>
+</div>
+
+<main class="wrap">
+
+<section id="summary" class="step" data-tab="요약" data-age="no">
+  <p class="step-no">요약</p>
+  <h2>단계별로 알아낸 것</h2>
+  <p class="lede">Scotese의 PALEOMAP 고지형(PaleoDEM)과 판 모델, 현대 지각 모델 CRUST1.0, 북미 층서 자료 Macrostrat으로 같은 질문을 단계별로 다시 계산했다. 단계마다 무엇을 알아냈는지와 그 근거를 보인다.</p>
     <ol class="findings">
       <li><b>PaleoDEM의 얕은 바다 수심은 측정값이 아니다.</b> 지도마다 대륙내해를 한 값(−160, −80, −40, 0, +40 m)으로 칠했다. "500 Ma 얕은 바다가 현재의 3배"는 그 칠한 값에 기댄 비교였다.</li>
       <li><b>Scotese가 지도마다 정한 해수면으로 물에 잠긴 대륙지각을 세면 캄브리아기는 최대가 아니다.</b> 후기 오르도비스기–데본기가 더 넓다.</li>
       <li><b>현대 지각을 되돌린 면적에는 두 가지 부풀림이 있다.</b> 그때 없던 지괴(500 Ma 약 20백만 km²)와 판 겹침(150 Ma 이후 약 15백만 km²).</li>
       <li><b>북미 Macrostrat 해성층 기록도 같은 순서를 보인다.</b> 정점은 450 Ma 무렵이고 캄브리아기는 그보다 낮다. 다만 독립 검증이 아니라 일관성 검사다.</li>
+      <li><b>Scotese와 독립적인 해수면(스트론튬 기반)을 쓰면 캄브리아기 침수를 지지하는 계산이 없다.</b> 현대 모양의 대륙에서 0–200 m 얕은 바다는 17–28백만 km²에 머물지만, Scotese 지형은 그 상한을 절반 가까운 시점에서 넘는다.</li>
     </ol>
+  <p class="muted small">위 메뉴에서 단계를 고르면 그 단계의 지도와 차트를 볼 수 있다. 지도는 좌우로 끌면 돌고, 위쪽 시점 막대로 시대를 바꾼다.</p>
+</section>
+
+<section id="s0" class="step" data-tab="근거" data-age="no">
+  <p class="step-no">연구의 근거</p>
+  <h2>대륙지각 부피가 일정하면 얕은 바다 면적도 크게 변하지 않았을 것이다</h2>
+  <blockquote class="quote">외핵과 내핵, 맨틀, 지각이 분리된 이후라면 지각의 일부가 맨틀로 끌려들어가거나 맨틀의 일부가 지각으로 올라오는 경우가 있기는 했겠으나, 전체적인 부피로 봤을 때 지각의 부피 자체는 크게 변하지 않았을 것이다. … (unless proven otherwise) 전체적인 대륙붕, 즉 얕은 바다의 면적이 크게 변하지는 않았을 것이다. 그러면 현생누대의 대륙 위치, 크기 등을 복원할 때 그걸 constraint로 놓고 작업하는 게 reasonable하다.<cite>— 연구자</cite></blockquote>
+  <div class="learned">
+    <h3>따져 본 결과</h3>
+    <ul>
+      <li><b>부피 일정: 합리적이다.</b> Armstrong (1981)은 대륙 프리보드가 일정하고 안정 대륙지각의 두께가 나이와 상관없이 고르다는 점을 들어 2.9 Ga 이후 대륙지각 성장이 무시할 만하다고 주장했다. 섭입대에서 더해지고 잃는 양이 비슷하면 현생누대의 순변화는 작다.</li>
+      <li><b>얕은 바다 면적 일정: 정의에 따라 갈린다.</b> 현대 대륙의 모양을 고정하고 독립 해수면만 바꾸면, 물가 아래 0–200 m 띠는 17–28백만 km²에 머문다. 해수면이 오르면 원래 대륙붕은 깊어지고 대신 대륙 안쪽이 잠겨 서로 상쇄되기 때문이다. 그러나 잠긴 대륙 전체는 해수면 100 m마다 17–20백만 km²씩 변한다. 해양 분지의 부피(해양저 나이)가 대륙과 무관하게 해수면을 수십–수백 m 움직이기 때문이다(009).</li>
+      <li><b>제약으로 쓰기: 쓸 만하다.</b> 이 제약을 놓으면 Scotese 지형의 고생대 대륙내해(−160 m로 넓게 칠함)가 걸러지고, 강체 역회전의 판 겹침(005)은 늘어난 연변을 되돌려 면적을 줄이고 두께를 늘려야 한다는 요구가 된다. 남은 일: 연변 길이에 따른 대륙붕 면적, Scotese 지형의 부피 검사.</li>
+    </ul>
   </div>
-</header>
+</section>
 
-<nav class="agebar" aria-label="시점">
-  <div class="wrap agebar-inner">
-    <button id="play" class="btn" aria-label="시점 자동 재생">▶</button>
-    <input id="age" type="range" min="0" max="108" step="1" aria-label="시점 고르기">
-    <output id="age-label" class="age-label"></output>
-  </div>
-</nav>
-
-<main class="wrap">
-
-<section id="s1" class="step">
+<section id="s1" class="step" data-tab="001 출발점" data-age="no">
   <p class="step-no">001 · 출발점</p>
   <h2>처음 계산: "500 Ma 얕은 바다는 현재의 약 3배"</h2>
   <div class="tiles">
@@ -44,7 +70,7 @@
   <p>처음 계산은 PaleoDEM 1° 격자에서 수심 0–200 m인 면적을 셌다. 경계를 150 m로 바꾸면 500 Ma가 현재보다 작아졌다. 이 이상한 민감도가 다음 단계의 출발점이었다. 같은 결과는 다른 기계(Python 3.13, NumPy 2.5, GDAL 3.12)에서도 바이트까지 재현됐다(002).</p>
 </section>
 
-<section id="s3" class="step">
+<section id="s3" class="step" data-tab="003 칠한 값" data-age="yes">
   <p class="step-no">003 · PaleoDEM의 값</p>
   <h2>해수면 부근 값은 40 m 계단이고, 대륙내해는 지도마다 한 값으로 칠해져 있다</h2>
   <div class="learned">
@@ -80,7 +106,7 @@
   </figure>
 </section>
 
-<section id="s4" class="step">
+<section id="s4" class="step" data-tab="004 잠긴 지각" data-age="yes">
   <p class="step-no">004 · 정의를 바꾼다</p>
   <h2>수심으로 나누지 않고, 물가 아래로 잠긴 대륙지각을 센다</h2>
   <div class="learned">
@@ -108,7 +134,7 @@
   </figure>
 </section>
 
-<section id="s8" class="step">
+<section id="s8" class="step" data-tab="008 아틀라스" data-age="yes">
   <p class="step-no">008 · 아틀라스 해수면 검증</p>
   <h2>옮겨 적은 해수면과 지도 번호 대응을 그림으로 확인했다</h2>
   <div class="learned">
@@ -129,7 +155,7 @@
   </figure>
 </section>
 
-<section id="s5" class="step">
+<section id="s5" class="step" data-tab="005 정렬" data-age="yes">
   <p class="step-no">005 · 정렬 검사</p>
   <h2>판 모델과 DEM은 맞는다. 그러나 현대 지각을 되돌리면 면적이 부풀려진다</h2>
   <div class="learned">
@@ -164,7 +190,7 @@
   </figure>
 </section>
 
-<section id="s6" class="step">
+<section id="s6" class="step" data-tab="006 Macrostrat" data-age="yes">
   <p class="step-no">006 · Macrostrat 북미</p>
   <h2>북미 해성층 기록도 후기 오르도비스기가 캄브리아기보다 넓다</h2>
   <div class="learned">
@@ -192,7 +218,29 @@
   </figure>
 </section>
 
-<section id="s7" class="step">
+<section id="s9" class="step" data-tab="009 독립 해수면" data-age="yes">
+  <p class="step-no">009 · 독립 해수면</p>
+  <h2>Scotese와 독립적인 해수면을 넣으면 캄브리아기는 낮다</h2>
+  <div class="learned">
+    <h3>알아낸 것</h3>
+    <ul>
+      <li>van der Meer et al. (2022)의 스트론튬 기반 판구조 해수면은 500 Ma를 −18 m(−65 ~ +17), 450 Ma를 +88 m, 380 Ma를 +63 m로 둔다. Scotese 아틀라스 해수면과는 시기별 높낮이가 다르다.</li>
+      <li>현대 대륙의 모양을 고정하면(모델 B) 500 Ma의 잠긴 대륙지각은 109개 시점 중 108번째로 작다.</li>
+      <li>Scotese 지형(모델 A)에 같은 해수면을 넣으면 0–200 m 띠가 109개 시점 중 52개에서 현대 모양의 상한(28.2백만 km²)을 넘는다. 500 Ma는 50.0이다.</li>
+      <li>판구조 성분은 지역 퇴적분지나 상세한 판 모델에 기대지 않지만, 풍화 보정과 빙하 성분은 같은 고지리·기온 복원에 기대므로 Scotese와 완전히 독립은 아니다.</li>
+    </ul>
+  </div>
+  <figure>
+    <h4 class="fig-title">해수면 (m, 현재 기준)</h4>
+    <div id="chart-sealevel"></div>
+  </figure>
+  <figure>
+    <h4 class="fig-title">판구조 해수면에서 잠긴 대륙지각 (백만 km²)</h4>
+    <div id="chart-models"></div>
+  </figure>
+</section>
+
+<section id="s7" class="step" data-tab="한계" data-age="no">
   <p class="step-no">한계와 다음</p>
   <h2>아직 답하지 못한 것</h2>
   <ul class="plain">

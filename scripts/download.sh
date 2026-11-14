@@ -23,6 +23,10 @@ zenodo=https://zenodo.org/api/records/5460860/files
 download "$zenodo/Scotese_Wright_2018_Maps_1-88_6minX6min_PaleoDEMS_nc.zip/content" dem_6min.zip
 download "$zenodo/Scotese_Wright2018_PALEOMAP_PaleoDEMs.pdf/content" paleodem_report.pdf
 download "$zenodo/PALEOMAP_PaleoAtlases.zip/content" paleoatlases.zip
+# van der Meer et al. (2022) 본문(CC BY 4.0)과 부록 1(해수면 곡선, devlog 009).
+mkdir -p literature
+download "https://eprints.whiterose.ac.uk/id/eprint/189833/7/1-s2.0-S1342937X22002192-main.pdf" literature/vandermeer2022.pdf
+download "https://ars.els-cdn.com/content/image/1-s2.0-S1342937X22002192-mmc1.xlsx" literature/vandermeer2022_mmc1.xlsx
 # Macrostrat 북미(project 1) 단위와 단면 (devlog 006). 계속 갱신되는 자료라 받은 날짜의 체크섬은
 # docs/macrostrat-sha256.txt에 따로 둔다. 다시 받으면 값이 달라질 수 있다.
 mkdir -p macrostrat

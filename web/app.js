@@ -262,6 +262,7 @@ function makeCharts() {
     ],
     note: '판 겹침의 계산 방식 오차(실제 겹침이 없는 강체 회전에서 나오는 값)는 약 1백만 km²다.',
   }));
+  independentCharts();
   charts.push(timeChart($('chart-macro'), {
     unit: '백만 km²', onPick: pick,
     series: [
@@ -270,6 +271,29 @@ function makeCharts() {
       { label: 'PBDB 연결 단위를 뺀 해성층 단면', short: 'PBDB 뺌', color: 'var(--series-1)', dash: true, values: S('macro_marine_nopbdb'), labelDy: 12 },
     ],
     note: '모델 범위(단면 안 대륙지각 표본점)는 24.6백만 km²다. 해성층 단면은 퇴적·보존을 거친 하한이다.',
+  }));
+}
+
+function independentCharts() {
+  const cap = ages.map(a => [a.age, 28.18]);
+  charts.push(timeChart($('chart-sealevel'), {
+    unit: 'm', yMin: -100, yMax: 240, onPick: pick,
+    series: [
+      { label: '판구조 해수면(스트론튬, 평균)', short: '판구조', color: 'var(--series-1)', values: S('tect_avg_m'), digits: 0 },
+      { label: '판구조 + 빙하', short: '+ 빙하', color: 'var(--series-3)', dash: true, values: S('tge_avg_m'), digits: 0 },
+      { label: 'Scotese 아틀라스 해수면', color: 'var(--series-2)', dot: true, values: ages.flatMap(a => a.atlas.map(x => [a.age, x.level])), digits: 0 },
+    ],
+    note: 'van der Meer et al. (2022) 부록 1. 판구조 성분의 최소–최대 범위는 캄브리아기에 ±50 m 안팎이다.',
+  }));
+  charts.push(timeChart($('chart-models'), {
+    unit: '백만 km²', yMin: 0, onPick: pick,
+    series: [
+      { label: 'Scotese 지형(모델 A), 물가 아래 0–200 m', short: 'A 0–200 m', color: 'var(--series-2)', values: S('A_band_tect_avg') },
+      { label: '현대 대륙 모양(모델 B), 잠긴 전체', short: 'B 전체', color: 'var(--series-3)', values: S('B_tect_avg') },
+      { label: '현대 대륙 모양(모델 B), 물가 아래 0–200 m', short: 'B 0–200 m', color: 'var(--series-1)', values: S('B_band_tect_avg') },
+      { label: '현대 모양에서 0–200 m 띠의 상한(28.2)', short: '상한', color: 'var(--text-muted)', dash: true, values: cap },
+    ],
+    note: '모델 B는 현대 대륙지각의 고도 분포(물·얼음 하중을 뺀 것)를 고정하고 해수면만 바꾼다. 대륙 배치·연변 길이·열침강은 넣지 않았다.',
   }));
 }
 
@@ -310,6 +334,39 @@ function redrawAll() {
   makeCharts();
   setIndex(index);
 }
+
+// ---- 단계 메뉴: 한 번에 한 단계만 보인다. 주소의 #id로 바로 연다. ----
+const sections = [...document.querySelectorAll('main > section[data-tab]')];
+const tabBox = $('tabs');
+const tabButtons = sections.map(sec => {
+  const b = document.createElement('button');
+  b.type = 'button'; b.className = 'tab'; b.role = 'tab'; b.textContent = sec.dataset.tab;
+  b.setAttribute('aria-controls', sec.id);
+  b.addEventListener('click', () => { if (location.hash !== '#' + sec.id) history.pushState(null, '', '#' + sec.id); showTab(sec.id); });
+  tabBox.appendChild(b);
+  return b;
+});
+function showTab(id) {
+  const target = sections.find(s => s.id === id) || sections[0];
+  sections.forEach((sec, i) => {
+    const on = sec === target;
+    sec.hidden = !on;
+    tabButtons[i].setAttribute('aria-selected', on);
+    tabButtons[i].tabIndex = on ? 0 : -1;
+    if (on) tabButtons[i].scrollIntoView({ block: 'nearest', inline: 'nearest' });
+  });
+  $('agebar').hidden = target.dataset.age === 'no';
+  window.scrollTo({ top: 0 });
+}
+tabBox.addEventListener('keydown', e => {
+  const i = tabButtons.indexOf(document.activeElement);
+  if (i < 0) return;
+  const j = e.key === 'ArrowRight' ? i + 1 : e.key === 'ArrowLeft' ? i - 1 : null;
+  if (j == null || !tabButtons[j]) return;
+  tabButtons[j].focus(); tabButtons[j].click(); e.preventDefault();
+});
+window.addEventListener('popstate', () => showTab(location.hash.slice(1)));
+showTab(location.hash.slice(1));
 
 buildColors();
 makeMaps();

@@ -4,7 +4,7 @@
 
 **저장소**: `git@github.com:jikhanjung/shallowsea.git`, 브랜치 `main`.
 
-**웹 페이지**: https://shallowsea.nopeoplestime.info = `v0.5.0`(커밋 `eff9efe`, 2026-11-14, digest `sha256:206e0091…`). 상단 단계별 메뉴로 한 단계씩 본다. 처음 배포와 구성은 [devlog 007](devlog/20261114_007_web_visualization.md). dolfinid `/srv/shallowsea`, 컨테이너 `shallowsea-shallowsea-1`, `127.0.0.1:8019`, Nginx 사이트 `shallowsea`, 인증서 만료 2027-02-12(자동 갱신). 결과를 바꾸면 `scripts/build_site_data.py` → 이미지 빌드·push → `bash deploy/deploy.sh <판>`.
+**웹 페이지**: https://shallowsea.nopeoplestime.info = `v0.6.0`(커밋 `2acd138`, 2026-11-14, digest `sha256:fe41af9c…`). 상단 단계별 메뉴로 한 단계씩 본다. 처음 배포와 구성은 [devlog 007](devlog/20261114_007_web_visualization.md). dolfinid `/srv/shallowsea`, 컨테이너 `shallowsea-shallowsea-1`, `127.0.0.1:8019`, Nginx 사이트 `shallowsea`, 인증서 만료 2027-02-12(자동 갱신). 결과를 바꾸면 `scripts/build_site_data.py` → 이미지 빌드·push → `bash deploy/deploy.sh <판>`.
 
 ## 배경과 가설
 

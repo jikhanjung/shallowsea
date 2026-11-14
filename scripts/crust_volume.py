@@ -7,7 +7,8 @@
    dry = 값 × k(k = 1 − 1.03/3.30). 표본점 면적 × 두께(dry)를 더해 부피를 낸다.
 3. 부피를 현재(같은 방법으로 0 Ma 지도에서 낸 값)와 같게 맞추려면 그 시점의 대륙 전체를 몇 m 올려야 하는지(δ)를
    구한다. δ > 0이면 Scotese가 부피 보존 대륙보다 낮게 그린 것이고, 해수면을 그만큼 높게 둔 것과 같다.
-면적: 추적 면적, 판 겹침을 셀 면적에 맞게 줄인 면적, 거기서 그때 없던 지괴(devlog 005)를 뺀 면적.
+면적: 추적 면적, 판 겹침을 셀 면적에 맞게 줄인 면적, 거기서 그때 없던 지괴(devlog 005)를 뺀 면적,
+그리고 겹침은 줄이지 않고 그때 없던 지괴만 뺀 면적(devlog 016).
 출력: results/crust_volume.csv, results/crust_volume_calibration.csv
 """
 import csv
@@ -59,7 +60,9 @@ def main():
         far = valid & (z < -1400) & (al.distance_class(g1[:, :360] >= -200, iy, ix) == 99)
         weights = {'tracked': np.where(valid, al.area, 0.0),
                    'dedup': np.where(valid, al.area * factor, 0.0),
-                   'dedup_without_far': np.where(valid & ~far, al.area * factor, 0.0)}
+                   'dedup_without_far': np.where(valid & ~far, al.area * factor, 0.0),
+                   # 판 겹침은 강체 되돌림의 인공물이라 부피 보존 아래에서는 두께로 상쇄된다고 보고 빼지 않는다(devlog 016).
+                   'tracked_without_far': np.where(valid & ~far, al.area, 0.0)}
         row = {'age_ma': f'{age:g}', 'map': map_no}
         for key, w in weights.items():
             row[f'{key}_area'] = w.sum() / 1e6
@@ -82,7 +85,9 @@ def main():
         far = valid & (z < -1400) & (al.distance_class(g1[:, :360] >= -200, iy, ix) == 99)
         weights = {'tracked': np.where(valid, al.area, 0.0),
                    'dedup': np.where(valid, al.area * factor, 0.0),
-                   'dedup_without_far': np.where(valid & ~far, al.area * factor, 0.0)}
+                   'dedup_without_far': np.where(valid & ~far, al.area * factor, 0.0),
+                   # 판 겹침은 강체 되돌림의 인공물이라 부피 보존 아래에서는 두께로 상쇄된다고 보고 빼지 않는다(devlog 016).
+                   'tracked_without_far': np.where(valid & ~far, al.area, 0.0)}
         for key, w in weights.items():
             lo, hi = -3000.0, 6000.0
             for _ in range(60):

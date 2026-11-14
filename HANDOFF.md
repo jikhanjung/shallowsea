@@ -41,6 +41,10 @@ PaleoCoastlines `areas.csv`로 한 면적·부피 수지와 원본 PaleoDEM 전 
 
 **m710q에서 재현된다**(2026-11-14, [devlog 002](devlog/20261114_002_reproduce_on_m710q.md)). Python 3.13.17, NumPy 2.5.4, pyGPlates 1.0.0, GDAL 3.12.2로 세 스크립트를 다시 돌렸다. CSV와 `depth_audit.txt`는 바이트 단위로 같고, `airy_sensitivity.txt`는 첫 줄의 두 합계만 마지막 자리(약 1e-16)가 다르다. 절차는 [README.md](README.md)에 있다.
 
+## 결론 초안
+
+[docs/conclusions.md](docs/conclusions.md)(2026-11-14, **초안, 사용자 확인 전**). 결론 C1–C9마다 근거 devlog와 한계([순환]·[역회전]·[칠한 값])를 붙였다. banjang이 독립 검토를 붙인 뒤 사용자 가설의 틀에 관한 문장(중심 문장, C7, C9)을 사용자에게 올린다.
+
 ## 지금 쓰는 정의
 
 **얕은 바다를 수심으로 나누지 않고, 물가 아래로 잠긴 CRUST1.0 대륙지각의 면적·부피를 센다**([devlog 004](devlog/20261114_004_waterline_definition.md), 2026-11-14 사용자와 정함). 물가는 PaleoAtlas 지도에 적힌 해수면이 기본이고(판이 여럿이면 범위), 해수면 0은 민감도다. 보간 지도 23개는 아틀라스 해수면이 없어 해수면 0 결과만 있다.

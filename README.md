@@ -10,7 +10,7 @@
 - [PaleoDEM 1°·0.1° 값별 면적](results/depth_classes.csv)과 [지도별 요약](results/depth_classes_summary.csv)
 - [PaleoAtlas 지도별 해수면 설정](docs/paleoatlas_sea_levels.csv)과 [그림·DEM 대조](results/atlas_sea_level_check.csv)
 - [독립 해수면(van der Meer et al. 2022)으로 센 잠긴 대륙지각](results/independent_sea_level.csv)
-- [연구의 근거와 검증](docs/rationale.md)
+- [연구의 근거와 검증](docs/rationale.md), [결론 초안](docs/conclusions.md)
 - [대륙 연변 길이와 대륙붕 면적](results/margin_length.csv)
 - [Scotese 지형이 담는 대륙지각 부피](results/crust_volume.csv)와 [지역별 부족](results/crust_volume_by_region.csv)
 - [회전한 지각과 DEM의 정렬 검사](results/alignment_summary.csv): 깊은 지각, 판 겹침, 중복 제거 면적
